@@ -6,6 +6,7 @@
 <a href="https://nagena.github.io/CheckoutCustom/demoCustom.html" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pagar</a>
 <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
 <script>
+$MPC.conf.messageOrigin="nagena";
 function execute_my_onreturn(json){
 		
 		alert("this is your access token " + json.card_token_id + " now you can Pay with MP");
