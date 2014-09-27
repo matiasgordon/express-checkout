@@ -9,8 +9,9 @@
 $MPC.conf.messageOrigin="nagena";
 $MPC.conf.resizeDuration=100;
 function execute_my_onreturn(json){
-		
 		alert("this is your access token " + json.card_token_id + " now you can Pay with MP");
+		sessionStorage.card_token_id =json.card_token_id;
+		window.location.href = "https://nagena.github.io/CheckoutCustom/Confirm.html"
 }
 </script>
 </body>
