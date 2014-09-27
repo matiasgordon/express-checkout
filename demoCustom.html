@@ -118,8 +118,7 @@
                     } 
                     else {
                         var card_token_id = response.id;
-                        var callbackJson = '{"card_token_id" :"'+response.id+'"}';
-                        finalizeRender(callbackJson);
+                        window.parent.postMessage('{"action":"finalize","data":{"card_token_id" :"'+response.id+'"}}', "*");
                     }
             } 
 
