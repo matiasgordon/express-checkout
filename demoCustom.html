@@ -5,93 +5,92 @@
         <meta charset="utf-8">
         <title>Pagar</title>
         <link rel="stylesheet" type="text/css" href="https://a248.e.akamai.net/secure.mlstatic.com/checkout-resources/resourses/checkout/css/custom.css"/>
-        <script>
-        	//resize modal
-        	if(self!=top && typeof window.parent.postMessage != 'undefined'){ 
-           		window.parent.postMessage('{"action":"resize","data":{"width":"400","height":"370"}}', "*");
-                } 
-	</script>
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="https://secure.mlstatic.com/org-img/checkout/custom/1.0/checkout.js"></script>
         
     </head>
     <body class="inline-frame">
         
-  <div id="container">
-  
-  <div class="add-payment-method-view">
+          <div id="container">
+          
+          <div class="add-payment-method-view">
 
-  <div class="payment-container">
-  
-  <div class="form-container">
-  
-  <div class="add-payment-method-form-view">
+          <div class="payment-container">
+          
+          <div class="form-container">
+          
+          <div class="add-payment-method-form-view">
 
-  <form action="" method="post" id="form-pagar-mp">
+          <form action="" method="post" id="form-pagar-mp">
 
-  <label class="card-label credit-card-number-label" for="credit-card-number">
-    <span class="field-name">Card Number</span>
-    <input data-checkout="cardNumber" id="cardNumber" class="card-field" type="tel" inputmode="numeric" placeholder="Card Number" autocomplete="off">
-    <span class="payment-method-icon"></span>
-    <div class="invalid-bottom-bar"></div>
-  </label>
+              <label class="card-label credit-card-number-label" for="credit-card-number">
+                <span class="field-name">Card Number</span>
+                <input data-checkout="cardNumber" id="cardNumber" class="card-field" type="tel" inputmode="numeric" placeholder="Card Number" autocomplete="off">
+                <span class="payment-method-icon"></span>
+                <div class="invalid-bottom-bar"></div>
+              </label>
 
-  <div class="row">
+              <div class="row">
 
-    <div class="column half">
-      <label class="card-label expiration-label right-border show-label" for="expiration">
-        <span class="field-name">MM / YYYY</span>
-        <input id="expiration" class="expiration card-field" type="tel" inputmode="numeric" placeholder="Expiration Date" autocomplete="off" maxlength="7">
-        <div class="invalid-bottom-bar"></div>
-      </label>
-    </div>
-    
-    <div class="column half">
-      <label class="card-label cvv-label" for="cvv">
-        <span class="field-name">CVV (3 digits)</span>
-        <input id="securityCode" data-checkout="securityCode" class="cvv card-field" maxlength="3" type="tel" inputmode="numeric" placeholder="CVV" autocomplete="off" autocapitalize="off">
-        <span class="payment-method-icon" id="undefined"></span>
-        <div class="invalid-bottom-bar"></div>
-      </label>
-    </div>
+                <div class="column half">
+                  <label class="card-label expiration-label right-border show-label" for="expiration">
+                    <span class="field-name">MM / YYYY</span>
+                    <input id="expiration" class="expiration card-field" type="tel" inputmode="numeric" placeholder="Expiration Date" autocomplete="off" maxlength="7">
+                    <div class="invalid-bottom-bar"></div>
+                  </label>
+                </div>
+                
+                <div class="column half">
+                  <label class="card-label cvv-label" for="cvv">
+                    <span class="field-name">CVV (3 digits)</span>
+                    <input id="securityCode" data-checkout="securityCode" class="cvv card-field" maxlength="3" type="tel" inputmode="numeric" placeholder="CVV" autocomplete="off" autocapitalize="off">
+                    <span class="payment-method-icon" id="undefined"></span>
+                    <div class="invalid-bottom-bar"></div>
+                  </label>
+                </div>
 
-    <div class="column half">
-        <label class="card-label" for="doc-number">
-            <span class="field-name">Doc Number</span>
-            <input id ="docNumber" data-checkout="docNumber" maxlength="15" class="card-field" type="text" placeholder="Doc Number">
-            <span class="payment-method-icon"></span>
-            <div class="invalid-bottom-bar"></div>
-        </label>
-    </div>
+                <div class="column half">
+                    <label class="card-label" for="doc-number">
+                        <span class="field-name">Doc Number</span>
+                        <input id ="docNumber" data-checkout="docNumber" maxlength="15" class="card-field" type="text" placeholder="Doc Number">
+                        <span class="payment-method-icon"></span>
+                        <div class="invalid-bottom-bar"></div>
+                    </label>
+                </div>
 
-    <div class="column half">
-        <label class="card-label" for="credit-card-holderName">
-            <span class="field-name">Card Holder Name</span>
-            <input id="cardholderName" data-checkout="cardholderName" maxlength="30" class="card-field" type="text" placeholder="Card Holder Name">
-            <span class="payment-method-icon"></span>
-            <div class="invalid-bottom-bar"></div>
-        </label>
-    </div>
-	<p><input class="demoSubmit" type="submit" value="Pay $20"></p>
-    <input data-checkout="docType" type="hidden" value="DNI"/>
+                <div class="column half">
+                    <label class="card-label" for="credit-card-holderName">
+                        <span class="field-name">Card Holder Name</span>
+                        <input id="cardholderName" data-checkout="cardholderName" maxlength="30" class="card-field" type="text" placeholder="Card Holder Name">
+                        <span class="payment-method-icon"></span>
+                        <div class="invalid-bottom-bar"></div>
+                    </label>
+                </div>
+            	<p><input class="demoSubmit" type="submit" value="Pay $20"></p>
+                <input data-checkout="docType" type="hidden" value="DNI"/>
 
-  </div>
-  
-</form>
+              </div>
+          
+        </form>
 
-<div class="server-error">
-  <div class="server-error-message-container">
-    <div class="server-error-message">
-      <span class="error-icon"></span>There was an error processing your request. <a href="#" class="error-retry">Try again</a>
-    </div>
-  </div>
-</div>
-</div></div>
+        <div class="server-error">
+          <div class="server-error-message-container">
+            <div class="server-error-message">
+              <span class="error-icon"></span>There was an error processing your request. <a href="#" class="error-retry">Try again</a>
+            </div>
+          </div>
+        </div>
+        </div></div>
 
-</div>
+        </div>
       <!--Start checkout integration -->
         <script type="text/javascript">
-              Checkout.setPublishableKey("841d020b-1077-4742-ad55-7888a0f5aefa");
+            //resize modal
+            if(self!=top && typeof window.parent.postMessage != 'undefined'){ 
+                window.parent.postMessage('{"action":"resize","data":{"width":"400","height":"370"}}', "*");
+            };
+
+            Checkout.setPublishableKey("841d020b-1077-4742-ad55-7888a0f5aefa");
               
             $("#form-pagar-mp").submit(function( event ) {
                 
