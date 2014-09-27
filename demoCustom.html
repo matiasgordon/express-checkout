@@ -179,7 +179,7 @@
                             activeInput(inputLabel);
                             hideError(inputLabel);
                             if($(this).attr('id')=="securityCode"){
-                                setCvvBehavior(inputLabel);
+                                setCvvBehavior(inputLabel, true);
                             }
                         },
                         focusout: function(e){
@@ -372,7 +372,7 @@
                               if (label == "recommended_method") {
                                   guessedCardId = r.id;
                                   var cvvLabel = $('label[for="cvv"]');
-                                  setCvvBehavior(cvvLabel);
+                                  setCvvBehavior(cvvLabel, false);
                                   return;
                               }
                           });
@@ -389,14 +389,18 @@
                     	}
                     	return "unknown";
                     }
-                    function setCvvBehavior(cvvLabel){
+                    function setCvvBehavior(cvvLabel, activeIcon){
                         if(guessedCardId=='amex'){
-                                cvvLabel.children("span[class='payment-method-icon']").attr('id', 'cid-icon');  
+                                if(activeIcon){
+                                    cvvLabel.children("span[class='payment-method-icon']").attr('id', 'cid-icon');
+                                }  
                                 cvvLabel.children("span[class='field-name']").text("CVV (4 digits)");
                                 cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "4");
                                 cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CID"); 
                         }else{
-                                cvvLabel.children("span[class='payment-method-icon']").attr('id', 'cvv-icon');
+                                if(activeIcon){
+                                    cvvLabel.children("span[class='payment-method-icon']").attr('id', 'cvv-icon');
+                                }
                                 cvvLabel.children("span[class='field-name']").text("CVV (3 digits)");
                                 cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "3");
                                 cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CVV");    
