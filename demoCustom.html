@@ -192,6 +192,14 @@
                                     inputLabel.children("input[class='cvv card-field']").attr("placeholder","CVV");   
                                 }
                             }
+                        },
+                        focusout: function(e){
+                            inputLabel = $(this).parent();
+                            deactiveInput(inputLabel);
+                            if($(this).attr('id')=="securityCode"){
+                                deactiveInput(inputLabel);
+                                inputLabel.children("span[class='payment-method-icon']").attr('id', 'undefined');
+                            }  
                         }
 
                     });
@@ -297,29 +305,6 @@
                                 $("#expiration").val(spliceSplit(expiration,2,0,"/"));
                             }
                             
-                    });
-                    //FocusOut
-                    $("#cardNumber").bind("focusout", 
-                        function(){
-                            deactiveInput($('label[for="credit-card-number"]'));
-                        });
-                    $("#securityCode").bind("focusout", 
-                        function(){
-                            cvvLabel=$('label[for="cvv"]');
-                            deactiveInput(cvvLabel);
-                            cvvLabel.children("span[class='payment-method-icon']").attr('id', 'undefined');  
-                        });
-                    $("#cardholderName").bind("focusout", 
-                        function(){
-                            deactiveInput($('label[for="credit-card-holderName"]'));
-                        });
-
-                    $("#docNumber").bind("focusout", 
-                        function(){
-                            deactiveInput($('label[for="doc-number"]'));
-                        });
-                    $("#expiration").bind("focusout", function(){
-                        deactiveInput($('label[for="expiration"]'));
                     });
 
 
