@@ -97,6 +97,7 @@
                 
                 var $form = $(this);
 
+                //legacy mode
                 var expires = document.getElementById('expiration').value;
                 var expiresSplit = expires.split('/');
                 var expirationYear= expiresSplit[1];
@@ -172,12 +173,15 @@
 				        }
                     }
                     //Manage binding
-                    $("#cardNumber").on("focus", 
-                        function(){
-                            var cardNumberLabel = $('label[for="credit-card-number"]');
-                            activeInput(cardNumberLabel);
-                            hideError(cardNumberLabel);
-                        });
+
+                    $("#cardNumber, #securityCode, #cardholderName, #docNumber, #expiration").on({
+                        focus: function(e){
+                            inputLabel = $(this).parent();
+                            activeInput(inputLabel);
+                            hideError(inputLabel);
+                        }
+
+                    }); 
                     $("#securityCode").on("focus", 
                         function(){
                             var cvvLabel = $('label[for="cvv"]');
@@ -194,24 +198,6 @@
                                 cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "3"); 
                                 cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CVV");   
                             }
-                        });
-                    $("#cardholderName").on("focus", 
-                        function(){
-                            var holderNameLabel = $('label[for="credit-card-holderName"]');
-                            activeInput(holderNameLabel);
-                            hideError(holderNameLabel);
-                        });
-
-                    $("#docNumber").on("focus", 
-                        function(){
-                            var docNumberLabel = $('label[for="doc-number"]');
-                            activeInput(docNumberLabel);
-                            hideError(docNumberLabel);
-                        });
-                    $("#expiration").on("focus", function(){
-                        var expirationLabel = $('label[for="expiration');
-                            activeInput(expirationLabel);
-                            hideError(expirationLabel);
                         });
 
                     //keyUp
