@@ -180,17 +180,7 @@
                             activeInput(inputLabel);
                             hideError(inputLabel);
                             if($(this).attr('id')=="securityCode"){
-                                if(guessedCardId=='amex'){
-                                    inputLabel.children("span[class='payment-method-icon']").attr('id', 'cid-icon');    
-                                    inputLabel.children("span[class='field-name']").text("CVV (4 digits)");
-                                    inputLabel.children("input[class='cvv card-field']").attr("maxlength", "4");
-                                    inputLabel.children("input[class='cvv card-field']").attr("placeholder","CID");
-                                }else{
-                                    inputLabel.children("span[class='payment-method-icon']").attr('id', 'cvv-icon');
-                                    inputLabel.children("span[class='field-name']").text("CVV (3 digits)");
-                                    inputLabel.children("input[class='cvv card-field']").attr("maxlength", "3"); 
-                                    inputLabel.children("input[class='cvv card-field']").attr("placeholder","CVV");   
-                                }
+                                setCvvBehavior(inputLabel);
                             }
                         },
                         focusout: function(e){
@@ -383,15 +373,7 @@
                               if (label == "recommended_method") {
                                   guessedCardId = r.id;
                                   var cvvLabel = $('label[for="cvv"]');
-                                    if(guessedCardId=='amex'){  
-                                        cvvLabel.children("span[class='field-name']").text("CVV (4 digits)");
-                                        cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "4");
-                                        cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CID"); 
-                                    }else{
-                                        cvvLabel.children("span[class='field-name']").text("CVV (3 digits)");
-                                        cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "3");
-                                        cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CVV");    
-                                    }
+                                  setCvvBehavior(cvvLabel);
                                   return;
                               }
                           });
@@ -407,6 +389,17 @@
                     		}
                     	}
                     	return "unknown";
+                    }
+                    function setCvvBehavior(cvvLabel){
+                        if(guessedCardId=='amex'){  
+                                cvvLabel.children("span[class='field-name']").text("CVV (4 digits)");
+                                cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "4");
+                                cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CID"); 
+                        }else{
+                                cvvLabel.children("span[class='field-name']").text("CVV (3 digits)");
+                                cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "3");
+                                cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CVV");    
+                        }
                     }
 
     </script>
