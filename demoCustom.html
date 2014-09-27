@@ -5,8 +5,14 @@
         <meta charset="utf-8">
         <title>Pagar</title>
         <link rel="stylesheet" type="text/css" href="https://a248.e.akamai.net/secure.mlstatic.com/checkout-resources/resourses/checkout/css/custom.css"/>
+        <script>
+        	if(self!=top && typeof window.parent.postMessage != 'undefined'){ 
+           		window.parent.postMessage('{"action":"resize","data":"{"width":"400","height":"370"}"}', "*");
+                } 
+	</script>
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="https://secure.mlstatic.com/org-img/checkout/custom/1.0/checkout.js"></script>
+        
     </head>
     <body class="inline-frame">
         
@@ -115,25 +121,6 @@
                         finalizeRender(callbackJson);
                     }
             } 
-
-                    //render functions
-                    function postMessageToRender(action, data){
-                        if(self!=top && typeof window.parent.postMessage != 'undefined'){ 
-                            window.parent.postMessage('{"action":"' + action + '","data":' + data + '}', "*");
-                        } 
-                    };
-
-                    function finalizeRender(data) { 
-                        postMessageToRender("finalize", data);
-                    };
-
-                    function resize(defaultWidth, defaultHeight){
-                        var postJson = '{"width":' + defaultWidth +',"height":' + defaultHeight +'}';   
-                        postMessageToRender("resize", postJson);
-                    };
-
-                    resize(400,370);
-
 
                     //Manage labels
                     function showLabel(atributte){
