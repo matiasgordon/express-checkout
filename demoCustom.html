@@ -176,7 +176,7 @@
 
                     $("#cardNumber, #securityCode, #cardholderName, #docNumber, #expiration").on({
                         focus: function(e){
-                            inputLabel = $(this).parent();
+                            var inputLabel = $(this).parent();
                             activeInput(inputLabel);
                             hideError(inputLabel);
                             if($(this).attr('id')=="securityCode"){
@@ -194,7 +194,7 @@
                             }
                         },
                         focusout: function(e){
-                            inputLabel = $(this).parent();
+                            var inputLabel = $(this).parent();
                             deactiveInput(inputLabel);
                             if($(this).attr('id')=="securityCode"){
                                 deactiveInput(inputLabel);
@@ -207,21 +207,22 @@
                     //keyUp
                     $("#cardNumber").on("keyup paste", 
                         function(e){
+                            var inputLabel=$(this).parent();
                             if(e.type=="keyup"){
                                 var ccNumber = $("#cardNumber").val().replace(/ /g, '').replace(/-/g, '').replace(/\./g, '');
                                 switch(ccNumber.length) {
                                     case 0:
-                                        hideLabel($('label[for="credit-card-number"]'));
+                                        hideLabel(inputLabel);
                                         break;
                                     case 1:
-                                        $('label[for="credit-card-number"]').children("span[class='payment-method-icon "+guessedCardId+"']").removeClass(guessedCardId);
+                                        inputLabel.children("span[class='payment-method-icon "+guessedCardId+"']").removeClass(guessedCardId);
                                         break;
                                     case 6:
                                     	guessingCreditCardNumber(ccNumber);
                                         Checkout.getPaymentMethod(ccNumber,setPaymentMethodInfo);
                                         break;
                                     default:
-                                    	showLabel($('label[for="credit-card-number"]'));
+                                    	showLabel(inputLabel);
                                     	break;
                                 }
                                 forceFormat();
@@ -231,9 +232,8 @@
                                 setTimeout(function() {
                                     ccNumber = $("#cardNumber").val().replace(/ /g, '').replace(/-/g, '').replace(/\./g, '');   
                                     if(ccNumber.length>1){
-                                     var ccNumberLabel = $('label[for="credit-card-number"]');
-                                    showLabel(ccNumberLabel);
-                                    ccNumberLabel.children("span[class='payment-method-icon "+guessedCardId+"']").removeClass(guessedCardId);
+                                    showLabel(inputLabel);
+                                    inputLabel.children("span[class='payment-method-icon "+guessedCardId+"']").removeClass(guessedCardId);
                                     }
                                     if(ccNumber.length>6){
                                         ccNumber=ccNumber.toString().substring(0,6);
@@ -246,54 +246,21 @@
                             }
                             
                     });
-                    $("#securityCode").bind("keyup paste", 
+                    $("#securityCode, #docNumber, #cardholderName").bind("keyup paste", 
                         function(e){
+                            var inputLabel=$(this).parent();
                             if(e.type=="keyup"){
-                                var cvv = $('#securityCode').val();
-                                switch(cvv.length) {
+                                var input = $(this).val();
+                                switch(input.length) {
                                     case 0:
-                                        hideLabel($('label[for="cvv"]'));
+                                        hideLabel(inputLabel);
                                         break;
                                     default:
-                                        showLabel($('label[for="cvv"]'));
+                                        showLabel(inputLabel);
                                         break;
                                 }
                             }else{
-                                showLabel($('label[for="cvv"]'));
-                            }
-                            
-                    });
-                    $("#docNumber").bind("keyup paste", 
-                        function(e){
-                            if(e.type=="keyup"){
-                                var docNumber = $('#docNumber').val();
-                                switch(docNumber.length) {
-                                    case 0:
-                                        hideLabel($('label[for="doc-number"]'));
-                                        break;
-                                    default:
-                                        showLabel($('label[for="doc-number"]'));
-                                        break;
-                                }
-                            }else{
-                                showLabel($('label[for="doc-number"]'));
-                            }
-                            
-                    });
-                    $("#cardholderName").bind("keyup paste", 
-                        function(e){
-                            if(e.type=="keyup"){
-                                var cholderName = $('#cardholderName').val();
-                                 switch(cholderName.length) {
-                                    case 0:
-                                        hideLabel($('label[for="credit-card-holderName"]'));
-                                        break;
-                                    default:
-                                        showLabel($('label[for="credit-card-holderName"]'));
-                                        break;
-                                }
-                            }else{
-                                showLabel($('label[for="credit-card-holderName"]'));
+                                showLabel(inputLabel);
                             }
                             
                     });
