@@ -391,11 +391,13 @@
                     	return "unknown";
                     }
                     function setCvvBehavior(cvvLabel){
-                        if(guessedCardId=='amex'){  
+                        if(guessedCardId=='amex'){
+                                cvvLabel.children("span[class='payment-method-icon']").attr('id', 'cid-icon');  
                                 cvvLabel.children("span[class='field-name']").text("CVV (4 digits)");
                                 cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "4");
                                 cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CID"); 
                         }else{
+                                cvvLabel.children("span[class='payment-method-icon']").attr('id', 'cvv-icon');
                                 cvvLabel.children("span[class='field-name']").text("CVV (3 digits)");
                                 cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "3");
                                 cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CVV");    
