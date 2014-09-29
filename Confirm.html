@@ -11,6 +11,23 @@
 			    doPayment();
 			    e.preventDefault();
 			  });
+		
+		
+		function get_access_token(cb){
+				$.ajax({
+					  type: "POST",
+					  url: "https://api.mercadolibre.com/oauth/token",
+					  data: {
+					  	"grant_type" : "client_credentials",
+					  	"client_id" : "2947782563244672", // test user
+					  	"client_secret" : "vlFOp8cF0xDsvmn4pz5WLkcBPUtIZ0Rq"
+					  },
+					  success: function(data, status, xhr){
+					  	if(cb) cb(data, status, xhr);
+					  },
+					  dataType: "json"
+					});
+			}
 
     		function doPayment(){
 
