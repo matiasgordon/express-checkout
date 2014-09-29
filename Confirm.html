@@ -27,12 +27,12 @@
 					  },
 					  dataType: "json"
 					});
-			}
+			};
 
     		function doPayment(){
     			var access_token;
-    			getAccessToken(functio(data){
-    				access_token =data.access_token;
+    			getAccessToken(function(data){
+    				access_token=data.access_token;
     			});
     			var data = {
 		              "amount": 2,
