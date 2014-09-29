@@ -19,8 +19,8 @@
 					  url: "https://api.mercadolibre.com/oauth/token",
 					  data: {
 					  	"grant_type" : "client_credentials",
-					  	"client_id" : "2947782563244672", // test user
-					  	"client_secret" : "vlFOp8cF0xDsvmn4pz5WLkcBPUtIZ0Rq"
+					  	"client_id" : "589615544091125", // test user
+					  	"client_secret" : "5TrvesD3ruopeOqYcL86hzZAcDudqv59"
 					  },
 					  success: function(data, status, xhr){
 					  	if(cb) cb(data, status, xhr);
@@ -32,15 +32,15 @@
     		function doPayment(){
 
     			var data = {
-	              "amount": 2,
-	              "reason": "Reloj",
-	              "currency_id": "ARS",
-	              "installments": 1,
-	              "card_token_id": localStorage.getItem("card_token_id"),
-	              "payer_email": "payermla01@hotmail.com",
-	              "external_reference": "1"
+		              "amount": 2,
+		              "reason": "Reloj",
+		              "currency_id": "ARS",
+		              "installments": 1,
+		              "card_token_id": localStorage.getItem("card_token_id"),
+		              "payer_email": "payermla01@hotmail.com",
+		              "external_reference": "1"
 		         };	
-				var uri = "https://api.mercadolibre.com/checkout/custom/create_payment?access_token=APP_USR-589615544091125-092710-8809e91b89030c9c1f625c729f0fa819__K_E__-137787120";
+				var uri = "https://api.mercadolibre.com/checkout/custom/create_payment?access_token=";
 				
 		        $.ajax({
 			        	 url: uri,
