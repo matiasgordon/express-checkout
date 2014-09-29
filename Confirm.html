@@ -33,8 +33,7 @@
     			var access_token;
     			getAccessToken(function(data){
     				access_token=data.access_token;
-    			});
-    			var data = {
+    				var data = {
 		              "amount": 2,
 		              "reason": "Reloj",
 		              "currency_id": "ARS",
@@ -42,24 +41,26 @@
 		              "card_token_id": localStorage.getItem("card_token_id"),
 		              "payer_email": "payermla03@hotmail.com",
 		              "external_reference": "1"
-		         };	
-				var uri = "https://api.mercadolibre.com/checkout/custom/create_payment?access_token="+access_token;
-				
-		        $.ajax({
-			        	 url: uri,
-			        	 type: "POST",
-			                 dataType: "json",
-			        	  contentType: "application/json",
-			                  timeout : 10000,
-			                  data: JSON.stringify(data),
-			                  error : function(jqXHR, textStatus, errorThrown) { 
-			                    alert(textStatus);
-			                },
-			                success:function(response){
-			                	alert(response);
-			                }
+			         };	
+					var uri = "https://api.mercadolibre.com/checkout/custom/create_payment?access_token="+access_token;
+					
+			        $.ajax({
+				        	 url: uri,
+				        	 type: "POST",
+				                 dataType: "json",
+				        	  contentType: "application/json",
+				                  timeout : 10000,
+				                  data: JSON.stringify(data),
+				                  error : function(jqXHR, textStatus, errorThrown) { 
+				                    alert(textStatus);
+				                },
+				                success:function(response){
+				                	alert(response);
+				                }
 
-		        });
+			        });
+    			});
+    			
     		}; 
 		</script>
     </body>
