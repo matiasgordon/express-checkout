@@ -63,7 +63,7 @@
       cvcLength: [3],
       luhn: true
     }, {
-      type: 'mastercard',
+      type: 'master',
       pattern: /^5/,
       format: defaultFormat,
       length: [16],
