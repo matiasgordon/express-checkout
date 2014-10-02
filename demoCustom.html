@@ -172,7 +172,7 @@
 				        if((errorCode != null && (errorCode == "324" || errorCode == "214")) || $("#docNumber").val()==""){
 				            showError($('label[for="doc-number"]'));
 				        }
-				        if((errorCode!=null && (errorCode == "208" || errorCode == "209" || errorCode == "325" || errorCode == "326")) || !$.payment.validateCardCVC($('#expiration').val(), cardType{
+				        if((errorCode!=null && (errorCode == "208" || errorCode == "209" || errorCode == "325" || errorCode == "326")) || !$.payment.validateCardCVC($('#expiration').val(), cardType)){
 				            showError($('label[for="expiration"]'));
 				        }
                     }
