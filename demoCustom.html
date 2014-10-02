@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <title>Pagar</title>
         <link rel="stylesheet" type="text/css" href="https://secure.mlstatic.com/checkout-resources/resourses/checkout/css/custom.css"/>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src="https://nagena.github.io/CheckoutCustom/javascripts/payment.js"></script>
         <script type="text/javascript" src="https://secure.mlstatic.com/org-img/checkout/custom/1.0/checkout.js"></script>
         
@@ -26,7 +26,7 @@
 
               <label class="card-label credit-card-number-label" for="credit-card-number">
                 <span class="field-name">Card Number</span>
-                <input data-checkout="cardNumber" id="cardNumber" class="card-field" type="tel" inputmode="numeric" placeholder="Card Number" autocomplete="off">
+                <input data-checkout="cardNumber" id="cardNumber" class="card-field" type="tel" inputmode="numeric" placeholder="Card Number" pattern="\d*" autocomplete="off">
                 <span class="payment-method-icon"></span>
                 <div class="invalid-bottom-bar"></div>
               </label>
@@ -36,7 +36,7 @@
                 <div class="column half">
                   <label class="card-label expiration-label right-border show-label" for="expiration">
                     <span class="field-name">MM / YYYY</span>
-                    <input id="expiration" class="expiration card-field" type="tel" inputmode="numeric" placeholder="Expiration Date" autocomplete="off" maxlength="7">
+                    <input id="expiration" class="expiration card-field" type="tel" inputmode="numeric" pattern="\d*" autocomplete="off" placeholder="Expiration Date">
                     <div class="invalid-bottom-bar"></div>
                   </label>
                 </div>
@@ -44,7 +44,7 @@
                 <div class="column half">
                   <label class="card-label cvv-label" for="cvv">
                     <span class="field-name">CVV (3 digits)</span>
-                    <input id="securityCode" data-checkout="securityCode" class="cvv card-field" maxlength="3" type="tel" inputmode="numeric" placeholder="CVV" autocomplete="off" autocapitalize="off">
+                    <input id="securityCode" data-checkout="securityCode" class="cvv card-field" type="tel" inputmode="numeric" placeholder="CVV" autocomplete="off" pattern="\d*" autocomplete="off">
                     <span class="payment-method-icon" id="undefined"></span>
                     <div class="invalid-bottom-bar"></div>
                   </label>
@@ -90,6 +90,12 @@
             if(self!=top && typeof window.parent.postMessage != 'undefined'){ 
                 window.parent.postMessage('{"action":"resize","data":{"width":"400","height":"370"}}', "*");
             };
+
+            jQuery(function($) {
+                $('#cardNumber').payment('formatCardNumber');
+                $('#expiration').payment('formatCardExpiry');
+                $('#securityCode').payment('formatCardCVC');
+            });
 
             Checkout.setPublishableKey("3486c27e-ba1c-4b08-89a8-8c6de3dc0808");
               
@@ -207,13 +213,11 @@
                                         break;
                                     case 6:
                                     	guessingCreditCardNumber(ccNumber);
-                                        Checkout.getPaymentMethod(ccNumber,setPaymentMethodInfo);
                                         break;
                                     default:
                                     	showLabel(inputLabel);
                                     	break;
                                 }
-                                forceFormat();
                             }else{
                                 var ccNumber;
 
@@ -226,9 +230,7 @@
                                     if(ccNumber.length>6){
                                         ccNumber=ccNumber.toString().substring(0,6);
                                         guessingCreditCardNumber(ccNumber);
-                                        Checkout.getPaymentMethod(ccNumber,setPaymentMethodInfo);
                                     }
-                                    forceFormat();
 
                                 }, 100);
                             }
@@ -252,142 +254,14 @@
                             }
                             
                     });
-
-                    $("#expiration").bind("keyup paste", 
-                        function(e){
-                            var expiration = $("#expiration").val();
-                            if(expiration.length>=2 && expiration.indexOf("/") == -1){
-                                $("#expiration").val(spliceSplit(expiration,2,0,"/"));
-                            }
-                            
-                    });
-
-
-
-                    //Format functions
                     var guessedCardId="visa";
-                    var applyFormat = function(value, digit, pos, separator) {
-
-                    var steps;
-                        switch (guessedCardId) {
-                            case 'amex':
-                                steps = [4, 6, 5];
-                                break;
-                            default:
-                                steps = [4, 4, 4];
-                        }
-                        value = value.slice(0, pos) + digit + value.slice(pos);
-                        value = value.replace(/\D/g, '');
-
-                        var parts = [];
-                        while (steps.length) {
-                            var step = steps.shift(),
-                                part1 = value.slice(0, step),
-                                part2 = value.slice(step);
-                            
-                            parts.push(part1);
-                            value = part2;
-                        }
-                        if (value !== "") {
-                            parts.push(value);
-                        }
-
-                        return $.trim(parts.join(separator));
-                    };
-
-                    var getCursorPosition = function(target) {
-                    var start = 0,
-                        end = 0,
-                        input = target.get(0);
-
-                    if (document.selection) { // IE
-                        input.focus();
-                        var sel = document.selection.createRange();
-                        var selLen = document.selection.createRange().text.length;
-                        sel.moveStart('character', -input.value.length);
-                        start = sel.text.length - selLen;
-                        end = start + selLen;
-                    } else if (input && $(input).is(':visible') && input.selectionStart !== null) { // Firefox/Webkit
-                        start = input.selectionStart;
-                        end = input.selectionEnd;
-                    }
-
-                    return {
-                        "start": start,
-                        "end": end
-                    };
-                    };
-                      
-                    var setCursorPosition = function(input, start, end) {
-                        return input.filter(':visible').each(function() {
-                            input = input[0];
-                            if (input.setSelectionRange) { // FF/Webkit
-                                input.focus();
-                                input.setSelectionRange(start, end);
-                            } else if (input.createTextRange) { // IE
-                                var range = input.createTextRange();
-                                range.collapse(true);
-                                range.moveEnd('character', end);
-                                range.moveStart('character', start);
-                                if (end - start >= 0) {
-                                    range.select();
-                                }
-                            }
-                        });
-                    };
-                    var forceFormat = function() {
-                    var target = $("#cardNumber"), 
-                        coord = getCursorPosition(target),
-                        val = target.val(),
-                        length = val.length,
-                        pos,
-                        maxLength = guessedCardId === 'amex' ? 15 : 16;
-                    
-                    if(val.replace(/\D/g, '').length > maxLength) { // para que no pueda pegar mas alla del limite de caracteres
-                        val = val.replace(/\D/g, '').slice(0, maxLength);
-                    }
-                    
-                    target.val(applyFormat(val, '', 0, ' '));
-                    
-                    if (coord.start !== length) { // si esta al final
-                        pos = coord.start; // dejo el cursor donde estaba
-                    } else {
-                        pos = target.val().length;; // sino, me aseguro que quede al final
-                    }
-                    
-                    setCursorPosition(target, pos, pos);
-                    };
-
-                    //a generic splice
-                    function spliceSplit(str, index, count, add) {
-                      var ar = str.split('');
-                      ar.splice(index, count, add);
-                      return ar.join('');
-                    }
-                    //manage PMT
-                    function setPaymentMethodInfo(status, result){
-                      $.each(result, function(p, r){
-                          $.each(r.labels, function(pos, label){
-                              if (label == "recommended_method") {
-                                  guessedCardId = r.id;
-                                  var cvvLabel = $('label[for="cvv"]');
-                                  setCvvBehavior(cvvLabel, false);
-                                  return;
-                              }
-                          });
-                      });
-                    };
-                    //manage credit card
-                    ccPmtRegex={"naranja":"^((402917)|(402918)|(527571)|(527572))","argencard":"^(501105)","visa":"^4","amex":"^3","master":"^5"};
                     
                     function guessingCreditCardNumber(ccNumber){
-                    	for (var pmt in ccPmtRegex){
-                    		if(ccNumber.match(ccPmtRegex[pmt])){
-                    			$('label[for="credit-card-number"]').children("span[class='payment-method-icon']").addClass(pmt);
-                    		}
-                    	}
-                    	return "unknown";
-                    }
+                        guessedCardId = $.payment.cardType(ccNumber);
+                    	$('label[for="credit-card-number"]').children("span[class='payment-method-icon']").addClass(guessedCardId);
+                        var cvvLabel = $('label[for="cvv"]');
+                        setCvvBehavior(cvvLabel, false);
+                    };
                     function setCvvBehavior(cvvLabel, activeIcon){
                         if(guessedCardId=='amex'){
                                 if(activeIcon){
@@ -404,7 +278,7 @@
                                 cvvLabel.children("input[class='cvv card-field']").attr("maxlength", "3");
                                 cvvLabel.children("input[class='cvv card-field']").attr("placeholder","CVV");    
                         }
-                    }
+                    };
 
     </script>
 </body>
