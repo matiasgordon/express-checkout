@@ -207,6 +207,7 @@
                                 switch(ccNumber.length) {
                                     case 0:
                                         hideLabel(inputLabel);
+                                        inputLabel.children("span[class='payment-method-icon "+guessedCardId+"']").removeClass(guessedCardId);
                                         break;
                                     case 1:
                                         inputLabel.children("span[class='payment-method-icon "+guessedCardId+"']").removeClass(guessedCardId);
