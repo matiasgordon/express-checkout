@@ -163,7 +163,7 @@
                     	if((errorCode != null && (errorCode == "E301" || errorCode == "205")) || !$.payment.validateCardNumber($("#cardNumber").val())){
 				            showError($('label[for="credit-card-number"]'));
 				        }
-				        if((errorCode != null && (errorCode == "E302" || errorCode == "224")) || !$.payment.validateCardCVC($("#securityCode").val())){
+				        if((errorCode != null && (errorCode == "E302" || errorCode == "224")) || !$.payment.validateCardCVC($("#securityCode").val()), guessedCardId){
 				            showError($('label[for="cvv"]'));
 				        }
 				        if((errorCode != null && errorCode == "221") || $("#cardholderName").val()==""){
@@ -172,7 +172,7 @@
 				        if((errorCode != null && (errorCode == "324" || errorCode == "214")) || $("#docNumber").val()==""){
 				            showError($('label[for="doc-number"]'));
 				        }
-				        if((errorCode!=null && (errorCode == "208" || errorCode == "209" || errorCode == "325" || errorCode == "326")) || !$.payment.validateCardCVC($("#expiration").val(), guessedCardId)){
+				        if((errorCode!=null && (errorCode == "208" || errorCode == "209" || errorCode == "325" || errorCode == "326")) || !$.payment.validateCardCVC($('#expiration').val(), cardType{
 				            showError($('label[for="expiration"]'));
 				        }
                     }
