@@ -167,7 +167,7 @@
                             hasError=true;
 
 				        }
-				        if((errorCode != null && (errorCode == "E302" || errorCode == "224")) || !$.payment.validateCardCVC($("#securityCode").val()), guessedCardId){
+				        if((errorCode != null && (errorCode == "E302" || errorCode == "224")) || !$.payment.validateCardCVC($("#securityCode").val(), guessedCardId){
 				            showError($('label[for="cvv"]'));
                             hasError=true;
 				        }
