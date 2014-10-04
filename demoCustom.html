@@ -102,7 +102,9 @@
             $("#form-pagar-mp").submit(function( event ) {
                 
                 var $form = $(this);
-                checkAndActiveError(null);
+                if(checkAndActiveError(null)){
+                    return false;
+                };
                 //legacy mode
                 var expires = document.getElementById('expiration').value;
                 var expiresSplit = expires.split('/');
@@ -159,22 +161,29 @@
                         }
                     }
                     function checkAndActiveError(errorCode){
-                    
+                        var hasError=false;
                     	if((errorCode != null && (errorCode == "E301" || errorCode == "205")) || !$.payment.validateCardNumber($("#cardNumber").val())){
 				            showError($('label[for="credit-card-number"]'));
+                            hasError=true;
+
 				        }
 				        if((errorCode != null && (errorCode == "E302" || errorCode == "224")) || !$.payment.validateCardCVC($("#securityCode").val()), guessedCardId){
 				            showError($('label[for="cvv"]'));
+                            hasError=true;
 				        }
 				        if((errorCode != null && errorCode == "221") || $("#cardholderName").val()==""){
 				            showError($('label[for="credit-card-holderName"]'));
+                            hasError=true;
 				        }
 				        if((errorCode != null && (errorCode == "324" || errorCode == "214")) || $("#docNumber").val()==""){
 				            showError($('label[for="doc-number"]'));
+                            hasError=true;
 				        }
 				        if((errorCode!=null && (errorCode == "208" || errorCode == "209" || errorCode == "325" || errorCode == "326")) || !$.payment.validateCardExpiry($('#expiration').payment('cardExpiryVal'))){
 				            showError($('label[for="expiration"]'));
+                            hasError=true;
 				        }
+                        return hasError;
                     }
                     //Manage binding
 
