@@ -112,27 +112,19 @@
 				}
 			}
 
-			//Manage labels
-			function showLabel(atributte) {
-				atributte.addClass("show-label");
-			}
-			function hideLabel(atributte) {
-				atributte.removeClass("show-label");
-			}
-			//Manage active inputs
-			function activeInput(atributte) {
-				atributte.addClass("active");
-			}
-			function deactiveInput(atributte) {
-				atributte.removeClass("active");
-			}
-			//Manage Errors
-			function showError(atributte) {
-				atributte.addClass("invalid");
-			}
-			function hideError(atributte) {
-				atributte.removeClass("invalid");
-			}
+            Checkout.setPublishableKey("3486c27e-ba1c-4b08-89a8-8c6de3dc0808");
+              
+            $("#form-pagar-mp").submit(function( event ) {
+                
+                var $form = $(this);
+                if(checkAndActiveError(null)){
+                    return false;
+                };
+                //legacy mode
+                var expires = document.getElementById('expiration').value;
+                var expiresSplit = expires.split('/');
+                var expirationYear= expiresSplit[1];
+                var expirationMont= expiresSplit[0];
 
 			function checkErrors(response) {
 				for (index = 0; response.cause && index < response.cause.length; index++) {
@@ -222,8 +214,40 @@
 									guessingCreditCardNumber(ccNumber);
 								}
 
-							}, 100);
-						}
+                    function checkErrors(response){
+                        for (index = 0;response.cause && index < response.cause.length; index++) {
+                           if (response.cause[index] != null) {
+                                var errorCode = response.cause[index].code;
+                                checkAndActiveError(errorCode);
+                           }
+                        }
+                    }
+                    function checkAndActiveError(errorCode){
+                        var hasError=false;
+                    	if((errorCode != null && (errorCode == "E301" || errorCode == "205")) || !$.payment.validateCardNumber($("#cardNumber").val())){
+				            showError($('label[for="credit-card-number"]'));
+                            hasError=true;
+
+				        }
+				        if((errorCode != null && (errorCode == "E302" || errorCode == "224")) || !$.payment.validateCardCVC($("#securityCode").val(), guessedCardId)){
+				            showError($('label[for="cvv"]'));
+                            hasError=true;
+				        }
+				        if((errorCode != null && errorCode == "221") || $("#cardholderName").val()==""){
+				            showError($('label[for="credit-card-holderName"]'));
+                            hasError=true;
+				        }
+				        if((errorCode != null && (errorCode == "324" || errorCode == "214")) || $("#docNumber").val()==""){
+				            showError($('label[for="doc-number"]'));
+                            hasError=true;
+				        }
+				        if((errorCode!=null && (errorCode == "208" || errorCode == "209" || errorCode == "325" || errorCode == "326")) || !$.payment.validateCardExpiry($('#expiration').payment('cardExpiryVal'))){
+				            showError($('label[for="expiration"]'));
+                            hasError=true;
+				        }
+                        return hasError;
+                    }
+                    //Manage binding
 
 					});
 
