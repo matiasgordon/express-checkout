@@ -11,71 +11,64 @@
     </head>
     <body class="inline-frame">
 		<div id="container">
-			<div class="add-payment-method-view">
-				<div class="payment-container">
-					<div class="form-container">
-						<div class="add-payment-method-form-view">
-							<form action="" method="post" id="form-pagar-mp">
-								<div class="column">
-									<label class="card-label credit-card-number-label" for="credit-card-number">
-										<span class="field-name">Card Number</span>
-										<input data-checkout="cardNumber" id="cardNumber" class="card-field" type="tel" placeholder="Card Number" autocomplete="off">
-										<span class="payment-methods payment-methods-mla"></span>
-									</label>
-								</div>
-								<div class="row">
-									<div class="column">
-										<label class="card-label expiration-label right-border show-label" for="expiration">
-											<span class="field-name">MM / YYYY</span>
-											<input id="expiration" class="expiration card-field" type="tel" autocomplete="off" placeholder="Expiration Date">
-										</label>
-									</div>
-									<div class="column">
-										<label class="card-label cvv-label" for="cvv">
-											<span class="field-name">CVV (3 digits)</span>
-											<input id="securityCode" data-checkout="securityCode" class="cvv card-field" type="tel" placeholder="CVV" autocomplete="off" pattern="\d*" />
-											<span class="payment-method-icon"></span>
-										</label>
-									</div>
-									<div class="column">
-										<label class="card-label" for="doc-number">
-											<span class="field-name">Doc Number</span>
-											<input id ="docNumber" data-checkout="docNumber" maxlength="15" class="card-field" type="text" placeholder="Doc Number" autocomplete="off">
-										</label>
-									</div>
-									<div class="column">
-										<label class="card-label" for="credit-card-holderName">
-											<span class="field-name">Card Holder Name</span>
-											<input id="cardholderName" data-checkout="cardholderName" maxlength="30" class="card-field" type="text" placeholder="Card Holder Name" autocomplete="off">
-										</label>
-										<div class="invalid-bottom-bar"></div>
-									</div>
-									<div class="column">
-										<p><input class="demoSubmit" type="submit" value="Confirm $20"></p>
-									</div>
-									<input data-checkout="docType" type="hidden" value="DNI"/>
-								</div>
+			<form action="" method="post" id="form-pagar-mp">
+				<div class="column">
+					<label class="card-label credit-card-number-label" for="credit-card-number">
+						<span class="field-name">Card Number</span>
+						<input id="credit-card-number" data-checkout="cardNumber" id="cardNumber" class="card-field" type="tel" placeholder="Card Number" autocomplete="off">
+						<span class="payment-methods payment-methods-mla"></span>
+					</label>
+				</div>
+				<div class="row">
+					<div class="column">
+						<label class="card-label expiration-label right-border show-label" for="expiration">
+							<span class="field-name">MM / YYYY</span>
+							<input id="expiration" class="expiration card-field" type="tel" autocomplete="off" placeholder="Expiration Date">
+						</label>
+					</div>
+					<div class="column">
+						<label class="card-label cvv-label" for="cvv">
+							<span class="field-name">CVV (3 digits)</span>
+							<input id="securityCode" data-checkout="securityCode" class="cvv card-field" type="tel" placeholder="CVV" autocomplete="off" pattern="\d*" />
+							<span class="payment-method-icon"></span>
+						</label>
+					</div>
+					<div class="column">
+						<label class="card-label" for="doc-number">
+							<span class="field-name">Doc Number</span>
+							<input id ="docNumber" data-checkout="docNumber" maxlength="15" class="card-field" type="text" placeholder="Doc Number" autocomplete="off">
+						</label>
+					</div>
+					<div class="column">
+						<label class="card-label" for="credit-card-holderName">
+							<span class="field-name">Card Holder Name</span>
+							<input id="cardholderName" data-checkout="cardholderName" maxlength="30" class="card-field" type="text" placeholder="Card Holder Name" autocomplete="off">
+						</label>
+						<div class="invalid-bottom-bar"></div>
+					</div>
+					<div class="column">
+						<p><input class="demoSubmit" type="submit" value="Confirm $20"></p>
+					</div>
+					<input data-checkout="docType" type="hidden" value="DNI"/>
+				</div>
 
-							</form>
+			</form>
 
-							<div class="server-error">
-								<div class="server-error-message-container">
-									<div class="server-error-message">
-										<span class="error-icon"></span>There was an error processing your request. <a href="#" class="error-retry">Try again</a>
-									</div>
-								</div>
-							</div>
-						</div>
+			<div class="server-error">
+				<div class="server-error-message-container">
+					<div class="server-error-message">
+						<span class="error-icon"></span>There was an error processing your request. <a href="#" class="error-retry">Try again</a>
 					</div>
 				</div>
 			</div>
-        </div>
+		</div>
 		<!--Start checkout integration -->
-        <script type="text/javascript">
+		<script type="text/javascript">
 			//resize modal
-			if (self != top && typeof window.parent.postMessage != 'undefined') {
+			if (self !== top && typeof window.parent.postMessage !== 'undefined') {
 				window.parent.postMessage('{"action":"resize","data":{"width":"400","height":"370"}}', "*");
 			}
+			;
 
 			jQuery(function ($) {
 				$('#cardNumber').payment('formatCardNumber');
@@ -86,10 +79,11 @@
 			Checkout.setPublishableKey("3486c27e-ba1c-4b08-89a8-8c6de3dc0808");
 
 			$("#form-pagar-mp").submit(function (event) {
-				event.preventDefault();
+
 				var $form = $(this);
-				if(!checkAndActiveError(null))
+				if (checkAndActiveError(null)) {
 					return false;
+				}
 				//legacy mode
 				var expires = document.getElementById('expiration').value;
 				var expiresSplit = expires.split('/');
@@ -100,11 +94,12 @@
 				$form.append($('<input type="hidden" data-checkout="cardExpirationYear"/>').val(expirationYear));
 
 				Checkout.createToken($form, mpResponseHandler);
+				event.preventDefault();
 				return false;
 			});
 
 			var mpResponseHandler = function (status, response) {
-				if (status != 200) {
+				if (status !== 200) {
 					checkErrors(response);
 				}
 				else {
@@ -112,52 +107,59 @@
 				}
 			}
 
-            Checkout.setPublishableKey("3486c27e-ba1c-4b08-89a8-8c6de3dc0808");
-              
-            $("#form-pagar-mp").submit(function( event ) {
-                
-                var $form = $(this);
-                if(checkAndActiveError(null)){
-                    return false;
-                };
-                //legacy mode
-                var expires = document.getElementById('expiration').value;
-                var expiresSplit = expires.split('/');
-                var expirationYear= expiresSplit[1];
-                var expirationMont= expiresSplit[0];
+			//Manage labels
+			function showLabel(atributte) {
+				atributte.addClass("show-label");
+			}
+			function hideLabel(atributte) {
+				atributte.removeClass("show-label");
+			}
+			//Manage active inputs
+			function activeInput(atributte) {
+				atributte.addClass("active");
+			}
+			function deactiveInput(atributte) {
+				atributte.removeClass("active");
+			}
+			//Manage Errors
+			function showError(atributte) {
+				atributte.addClass("invalid");
+			}
+			function hideError(atributte) {
+				atributte.removeClass("invalid");
+			}
 
 			function checkErrors(response) {
 				for (index = 0; response.cause && index < response.cause.length; index++) {
-					if (response.cause[index] != null) {
+					if (response.cause[index] !== null) {
 						var errorCode = response.cause[index].code;
 						checkAndActiveError(errorCode);
 					}
 				}
 			}
 			function checkAndActiveError(errorCode) {
-				var error = false;
-				if ((errorCode != null && (errorCode == "E301" || errorCode == "205")) || !$.payment.validateCardNumber($("#cardNumber").val())) {
+				var hasError = false;
+				if ((errorCode !== null && (errorCode === "E301" || errorCode === "205")) || !$.payment.validateCardNumber($("#cardNumber").val())) {
 					showError($('label[for="credit-card-number"]'));
-					error = true;
+					hasError = true;
 				}
-				if ((errorCode != null && (errorCode == "E302" || errorCode == "224")) || !$.payment.validateCardCVC($("#securityCode").val(), guessedCardId)) {
+				if ((errorCode !== null && (errorCode === "E302" || errorCode === "224")) || !$.payment.validateCardCVC($("#securityCode").val(), guessedCardId)) {
 					showError($('label[for="cvv"]'));
-					error = true;
+					hasError = true;
 				}
-				if ((errorCode != null && errorCode == "221") || $("#cardholderName").val() == "") {
+				if ((errorCode !== null && errorCode === "221") || $("#cardholderName").val() === "") {
 					showError($('label[for="credit-card-holderName"]'));
-					error = true;
+					hasError = true;
 				}
-				if ((errorCode != null && (errorCode == "324" || errorCode == "214")) || $("#docNumber").val() == "") {
+				if ((errorCode !== null && (errorCode === "324" || errorCode === "214")) || $("#docNumber").val() === "") {
 					showError($('label[for="doc-number"]'));
-					error = true;
+					hasError = true;
 				}
-				if ((errorCode != null && (errorCode == "208" || errorCode == "209" || errorCode == "325" || errorCode == "326")) || !$.payment.validateCardExpiry($('#expiration').payment('cardExpiryVal'))) {
+				if ((errorCode !== null && (errorCode === "208" || errorCode === "209" || errorCode === "325" || errorCode === "326")) || !$.payment.validateCardExpiry($('#expiration').payment('cardExpiryVal'))) {
 					showError($('label[for="expiration"]'));
-					error = true;
+					hasError = true;
 				}
-				
-				return !error;
+				return hasError;
 			}
 			//Manage binding
 
@@ -166,14 +168,14 @@
 					var inputLabel = $(this).parent();
 					activeInput(inputLabel);
 					hideError(inputLabel);
-					if ($(this).attr('id') == "securityCode") {
+					if ($(this).attr('id') === "securityCode") {
 						setCvvBehavior(inputLabel, true);
 					}
 				},
 				focusout: function (e) {
 					var inputLabel = $(this).parent();
 					deactiveInput(inputLabel);
-					if ($(this).attr('id') == "securityCode") {
+					if ($(this).attr('id') === "securityCode") {
 						deactiveInput(inputLabel);
 						inputLabel.children("span[class='payment-method-icon']").attr('id', 'undefined');
 					}
@@ -185,7 +187,7 @@
 			$("#cardNumber").on("keyup paste",
 					function (e) {
 						var inputLabel = $(this).parent();
-						if (e.type == "keyup") {
+						if (e.type === "keyup") {
 							var ccNumber = $("#cardNumber").val().replace(/ /g, '').replace(/-/g, '').replace(/\./g, '');
 							switch (ccNumber.length) {
 								case 0:
@@ -214,66 +216,34 @@
 									guessingCreditCardNumber(ccNumber);
 								}
 
-                    function checkErrors(response){
-                        for (index = 0;response.cause && index < response.cause.length; index++) {
-                           if (response.cause[index] != null) {
-                                var errorCode = response.cause[index].code;
-                                checkAndActiveError(errorCode);
-                           }
-                        }
-                    }
-                    function checkAndActiveError(errorCode){
-                        var hasError=false;
-                    	if((errorCode != null && (errorCode == "E301" || errorCode == "205")) || !$.payment.validateCardNumber($("#cardNumber").val())){
-				            showError($('label[for="credit-card-number"]'));
-                            hasError=true;
-
-				        }
-				        if((errorCode != null && (errorCode == "E302" || errorCode == "224")) || !$.payment.validateCardCVC($("#securityCode").val(), guessedCardId)){
-				            showError($('label[for="cvv"]'));
-                            hasError=true;
-				        }
-				        if((errorCode != null && errorCode == "221") || $("#cardholderName").val()==""){
-				            showError($('label[for="credit-card-holderName"]'));
-                            hasError=true;
-				        }
-				        if((errorCode != null && (errorCode == "324" || errorCode == "214")) || $("#docNumber").val()==""){
-				            showError($('label[for="doc-number"]'));
-                            hasError=true;
-				        }
-				        if((errorCode!=null && (errorCode == "208" || errorCode == "209" || errorCode == "325" || errorCode == "326")) || !$.payment.validateCardExpiry($('#expiration').payment('cardExpiryVal'))){
-				            showError($('label[for="expiration"]'));
-                            hasError=true;
-				        }
-                        return hasError;
-                    }
-                    //Manage binding
+							}, 100);
+						}
 
 					});
-
-			$("#securityCode, #docNumber, #cardholderName").bind("keyup paste", function (e) {
-				var inputLabel = $(this).parent();
-				if (e.type == "keyup") {
-					var input = $(this).val();
-					switch (input.length) {
-						case 0:
-							hideLabel(inputLabel);
-							break;
-						default:
+			$("#securityCode, #docNumber, #cardholderName").bind("keyup paste",
+					function (e) {
+						var inputLabel = $(this).parent();
+						if (e.type === "keyup") {
+							var input = $(this).val();
+							switch (input.length) {
+								case 0:
+									hideLabel(inputLabel);
+									break;
+								default:
+									showLabel(inputLabel);
+									break;
+							}
+						} else {
 							showLabel(inputLabel);
-							break;
-					}
-				} else {
-					showLabel(inputLabel);
-				}
+						}
 
-			});
+					});
 
 			var guessedCardId;
 			var paymentMethodsBase = "payment-methods-mla";
 			function guessingCreditCardNumber(ccNumber) {
 				guessedCardId = $.payment.cardType(ccNumber);
-				$('label[for="credit-card-number"]').children("span[class='payment-methods "+paymentMethodsBase+"']").addClass(guessedCardId);
+				$('label[for="credit-card-number"]').children("span[class='payment-methods " + paymentMethodsBase + "']").addClass(guessedCardId);
 				var cvvLabel = $('label[for="cvv"]');
 				setCvvBehavior(cvvLabel, false);
 			}
