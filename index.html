@@ -1,18 +1,18 @@
 <html>
-<head>
-<meta name="layout" content="default"/>
-</head>
-<body>
-<a href="https://nagena.github.io/CheckoutCustom/demoCustom.html" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Confirm</a>
-<script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
-<script>
-$MPC.conf.messageOrigin="nagena";
-$MPC.conf.resizeDuration=100;
-function execute_my_onreturn(json){
-		alert("this is your access token " + json.card_token_id + " now you can Pay with MP");
-		localStorage.setItem("card_token_id",json.card_token_id);
-		window.location.href = "https://nagena.github.io/CheckoutCustom/Confirm.html"
-}
-</script>
-</body>
+	<head>
+		<meta name="layout" content="default"/>
+	</head>
+	<body>
+		<a href="https://nagena.github.io/CheckoutCustom/demoCustom.html" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Confirm</a>
+		<script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
+		<script>
+			$MPC.conf.messageOrigin = "nagena";
+			$MPC.conf.resizeDuration = 100;
+			function execute_my_onreturn(json) {
+				alert("this is your access token " + json.card_token_id + " now you can Pay with MP");
+				localStorage.setItem("card_token_id", json.card_token_id);
+				window.location.href = "https://nagena.github.io/CheckoutCustom/Confirm.html";
+			}
+		</script>
+	</body>
 </html>
