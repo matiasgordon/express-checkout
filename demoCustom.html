@@ -140,7 +140,7 @@
 			function checkAndActiveError(errorCode) {
 				var hasError = false;
 				if ((errorCode !== null && (errorCode === "E301" || errorCode === "205")) || !$.payment.validateCardNumber($("#cardNumber").val())) {
-					showError($('label[for="credit-card-number"]'));
+					showError($('label[for="cardNumber"]'));
 					hasError = true;
 				}
 				if ((errorCode !== null && (errorCode === "E302" || errorCode === "224")) || !$.payment.validateCardCVC($("#securityCode").val(), guessedCardId)) {
@@ -243,7 +243,7 @@
 			var paymentMethodsBase = "payment-methods-mla";
 			function guessingCreditCardNumber(ccNumber) {
 				guessedCardId = $.payment.cardType(ccNumber);
-				$('label[for="credit-card-number"]').children("span[class='payment-methods " + paymentMethodsBase + "']").addClass(guessedCardId);
+				$('label[for="cardNumber"]').children("span[class='payment-methods " + paymentMethodsBase + "']").addClass(guessedCardId);
 				var cvvLabel = $('label[for="cvv"]');
 				setCvvBehavior(cvvLabel, false);
 			}
