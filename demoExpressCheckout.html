@@ -20,7 +20,7 @@
  				<h2>Express Checkout</h2>
 	            <div class="hidden">
 	            	
-					<input id="site" value="mlv" type="text" />  <input type="button" id="changeSite" title="Change" value="Cambiar site"/>
+					<input id="site" value="mla" type="text" />  <input type="button" id="changeSite" title="Change" value="Cambiar site"/>
 	            
 	            </div>  
 	            <div>
@@ -133,14 +133,14 @@
 			</div>
 		</div>
 		<!--Start checkout integration -->
-		<script>
+		<script type="text/javascript">
 
 			//resize modal
 			if (self !== top && typeof window.parent.postMessage !== 'undefined') {
 				window.parent.postMessage('{"action":"resize","data":{"width":"400","height":"370"}}', "*");
 			}
-			;
 			
+
 
 			var fullData = ["cardholderName","ccNumber","expiration","cvv","docType","subDocType","docNumber","issuersOptions"];
 
