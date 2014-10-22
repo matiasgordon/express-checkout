@@ -20,7 +20,7 @@
  				<h2>Express Checkout</h2>
 	            <div class="hidden">
 	            	
-					<input id="site" value="mla" type="text" />  <input type="button" id="changeSite" title="Change" value="Cambiar site"/>
+					<input id="site" value="mlv" type="text" />  <input type="button" id="changeSite" title="Change" value="Cambiar site"/>
 	            
 	            </div>  
 	            <div>
@@ -58,8 +58,8 @@
         </div>
         <div id="fullForm" class="column hidden">  
              <h2>Payment method</h2>
-             <label class="card-label" for="cardId">
-            	<select id="cardId" data-checkout='cardId' class="card-field hidden"></select>
+             <label class="card-label hidden" for="cardId">
+            	<select id="cardId" data-checkout='cardId' class="card-field"></select>
              </label>
              <div>
                <label class="card-label" for="cardholderName">
@@ -75,9 +75,9 @@
               
             </div>
              <div>
-                <label class="card-label expiration-label right-border" for="expiration">
+                <label class="card-label expiration-label right-border show-label" for="expiration">
 							<span class="field-name">MM / YYYY</span>
-	                <input id="expiration" data-checkout="cardExpiration-" placeholder="MM/YY" type="text" class="card-field" />
+	                <input id="expiration" data-checkout="cardExpiration-" placeholder="Expiration Date" type="text" class="card-field" />
 	            </label>
 
 	        	<label class="card-label cvv-label" for="cvv">
@@ -89,24 +89,27 @@
             <div  id="rememberCard">   
                  <label>remember my card </label>
                 <input type="checkbox" id="saveMyCard" checked/>
-                <!--label class="required">CVV:</label> 
-                <input data-checkout="securityCode"  placeholder="CVV" type="text" / -->
+                
             </div>  
            
             <div>
-            	<label class="card-label" for="docType">
+            	<label class="card-label hidden" for="docType">
                 	<span id="docType"></span>
                 </label>
-                <label class="card-label" for="subDocType">
+            </div>
+            <div>
+                <label class="card-label hidden" for="subDocType">
                 	<span id="subDocType"></span>
                 </label>
+            </div>
+            <div>
                 <label class="card-label" for="docNumber">
                 	<input id="docNumber" data-checkout="docNumber" placeholder="Identidication Number" type="text" class="card-field"/>
                 <label>
             </div>
 
             <p id="issuersField" class="hidden">
-            	<label class="card-label" for="docType">
+            	<label class="card-label" for="issuersOptions">
             		<select id="issuersOptions" class="card-field"></select>
             	</label>
             </p>
@@ -131,6 +134,13 @@
 		</div>
 		<!--Start checkout integration -->
 		<script>
+
+			//resize modal
+			if (self !== top && typeof window.parent.postMessage !== 'undefined') {
+				window.parent.postMessage('{"action":"resize","data":{"width":"400","height":"370"}}', "*");
+			}
+			;
+			
 
 			var fullData = ["cardholderName","ccNumber","expiration","cvv","docType","subDocType","docNumber","issuersOptions"];
 
@@ -337,6 +347,8 @@
 			                $("select[data-checkout='cardId']").html(cardsOptions);
 			             	$("select[data-checkout='cardId']").change();
 			            }
+			        }else{
+			        	 $("label[for='cardId']").addClass("hidden");
 			        }
 			        $("#init").hide()
 			        $("#fullForm").show();
@@ -357,7 +369,7 @@
 			            $("label[for='"+value+"']").addClass("hidden");
 			        });
 			        $("#rememberCard").addClass("hidden");
-			        $("#cardId").removeClass("hidden");
+			        $("label[for='cardId']").removeClass("hidden");
 			         $("label[for='cvv']").removeClass("hidden");
 
 			        Checkout.getPaymentMethod($("select[data-checkout='cardId'] option:selected").attr("first_six_digits"),setPaymentMethodInfo);
@@ -380,7 +392,7 @@
 			    options+="</select>";
 			    $("#docType").html($("#docType").html()+options);
 
-			    $("#docType").removeClass("hidden");
+			    $("label[for=docType]").removeClass("hidden");
 			}
 
 			var subDocTypes = Checkout.getSubDocTypes($("#site").val().toUpperCase());
@@ -394,7 +406,7 @@
 			    options+="</select>";
 			    $("#subDocType").html($("#subDocType").html()+options);
 
-			    $("#subDocType").removeClass("hidden");
+			    $("label[for=subDocType]").removeClass("hidden");
 
 			    $("select[data-checkout='docType']").bind("change",function(){
 			        options ="";
