@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pagar</title>
+        <link rel="stylesheet" type="text/css" href="stylesheets/custom.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="javascripts/payment.js"></script>
+        <script src="javascripts/checkout.js"></script>
+        <style>
+        </style>
+        <!--script type="text/javascript" src="https://secure.mlstatic.com/org-img/checkout/custom/1.0/checkout.js"></script-->
+
+    </head>
+    <body class="inline-frame">
+		<div id="container1">
+		<form id="card-form" name="card-token">
+		<div class="row">	
+	        <div id="init" class="column">
+ 				<h2>Express Checkout</h2>
+	            <div class="hidden">
+	            	
+					<input id="site" value="mla" type="text" />  <input type="button" id="changeSite" title="Change" value="Cambiar site"/>
+	            
+	            </div>  
+	            <div>
+	            	<label class="card-label" for="reason">
+	                	<input id="reason" class="card-field" placeholder="Reason" type="text" />
+	                </label>
+	            </div>
+	        
+	            <div>
+	            	<label class="card-label" for="amount">
+	                	<input id="amount" placeholder="amount" type="text" class="card-field"/>
+	                </label>
+	            </div>  
+	            <div>
+	            	<label class="card-label" for="email">
+	                	<input id="email" type="email" placeholder="Email" class="card-field"/>
+	                </label>
+	            </div>
+	             <div>
+	             	<input type="button" id="login" value="Init" class="demoSubmit"/>
+	            </div>
+	        </div>
+	    </div> 
+        <!--div id="cards" class="column hidden">
+            <select data-checkout='cardId' class="hiddenn"></select>
+            
+        </div-->
+
+        <div id="results" class="row hidden">
+			<h3 id="result"> </h3> 
+			 <div>
+             	<input type="button" id="back" value="Pay again"  class="demoSubmit"/>
+            </div>
+                   
+        </div>
+        <div id="fullForm" class="column hidden">  
+             <h2>Payment method</h2>
+             <label class="card-label" for="cardId">
+            	<select id="cardId" data-checkout='cardId' class="card-field hidden"></select>
+             </label>
+             <div>
+               <label class="card-label" for="cardholderName">
+							<span class="field-name">Card Holder Name</span>
+	                <input id="cardholderName" data-checkout="cardholderName" placeholder="Cardholder name" type="text" class="card-field" />
+	            </label>
+            </div>
+            <div>
+            	<label class="card-label credit-card-number-label" for="ccNumber">
+						<span class="field-name">Card Number</span>
+	                <input id="ccNumber"  data-checkout="cardNumber" type="text" placeholder="Card Number" class="card-field" />
+	            </label>
+              
+            </div>
+             <div>
+                <label class="card-label expiration-label right-border" for="expiration">
+							<span class="field-name">MM / YYYY</span>
+	                <input id="expiration" data-checkout="cardExpiration-" placeholder="MM/YY" type="text" class="card-field" />
+	            </label>
+
+	        	<label class="card-label cvv-label" for="cvv">
+							<span class="field-name">CVV (3 digits)</span>
+                	 <input id="cvv" data-checkout="securityCode"  placeholder="CVV" type="text" class="card-field"/>
+                </label>
+            </div>              
+
+            <div  id="rememberCard">   
+                 <label>remember my card </label>
+                <input type="checkbox" id="saveMyCard" checked/>
+                <!--label class="required">CVV:</label> 
+                <input data-checkout="securityCode"  placeholder="CVV" type="text" / -->
+            </div>  
+           
+            <div>
+            	<label class="card-label" for="docType">
+                	<span id="docType"></span>
+                </label>
+                <label class="card-label" for="subDocType">
+                	<span id="subDocType"></span>
+                </label>
+                <label class="card-label" for="docNumber">
+                	<input id="docNumber" data-checkout="docNumber" placeholder="Identidication Number" type="text" class="card-field"/>
+                <label>
+            </div>
+
+            <p id="issuersField" class="hidden">
+            	<label class="card-label" for="docType">
+            		<select id="issuersOptions" class="card-field"></select>
+            	</label>
+            </p>
+            <p id="installments" class="hidden"><select id="installmentsOption" class="card-field"></select></p>
+
+
+
+            <div class="l-centralized l-row-mini">
+                <button id="doPayment" title="Pay" class="demoSubmit">Pay</button>
+            </div>
+
+		</div>
+    </form>
+
+			<div class="server-error">
+				<div class="server-error-message-container">
+					<div class="server-error-message">
+						<span class="error-icon"></span>There was an error processing your request. <a href="#" class="error-retry">Try again</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Start checkout integration -->
+		<script>
+
+			var fullData = ["cardholderName","ccNumber","expiration","cvv","docType","subDocType","docNumber","issuersOptions"];
+
+			var setPublishableKey = {"mla":"841d020b-1077-4742-ad55-7888a0f5aefa",
+			                        "mlb":"f3c03c9c-f448-4564-9743-77b2a13270e6",
+			                        "mlv":"2b66598b-8b0f-4588-bd2f-c80ca21c6d18",
+			                        "mco":"363ffc24-86ac-4f33-aa59-1bd165f82d2d",
+			                        "mlm":"6c0d81bc-99c1-4de8-9976-c8d1d62cd4f2"};
+			var currencies = {"mla":"ARS","mlb":"BRL","mlm":"MXN","mlv":"VEF","mco":"COP"};
+			var customer ;
+			var accessToken = null;
+			var customers = {"mla":"payermla03@hotmail.com",
+			                "mlb":"payermlb03@hotmail.com",
+			                "mlm":"test_user_39626110@testuser.com",
+			                "mlv":"test_user_6238240@testuser.com",
+			                "mco":""};
+
+			                //real merchant 
+			                //grant_type=client_credentials&client_id=2845&client_secret=XWepR1oQSy9NYBO4erhjVEMG6DQNNPiI
+			var clientCredentials = {"mla": {client_id:"7929281084187786", client_secret:"zgO0UhRBSnDRYLq0M8emV62s7VUw62Vu"} ,
+			                        "mlb":{client_id:"8416983816885152", client_secret:"N7W7ikpROK1aCn4Te6rJKK19BF9KYqXv"},
+			                        "mlm":{client_id:"3862657147824031", client_secret:"Mu6MIbvux4DgucbFpMXP8MzVgYaWNAN5"},
+			                        "mlv":{client_id:"1596123952932221", client_secret:"UVPXngNvyRDCSuz7WtFfuKDLefVWRuiF"},
+			                        "mco":{client_id:"8375520619203623", client_secret:"fZnFRFDsPhtTPBXYic6ZNCZazwBbYcEs"}};
+			var defaultIssuerId = null;
+			var pmt = null
+			Checkout.setPublishableKey("841d020b-1077-4742-ad55-7888a0f5aefa");
+
+			var mpResponseHandler = function(status, response) {
+			    var cardTokenId;
+			    $("#response").html("");
+			    var $form = $('#card-form');
+
+			    if (status != 200 && status != 201) {
+			       
+			        for (index = 0;response.cause && index < response.cause.length; index++) {
+				        if (response.cause[index] != null) {
+			               	var errorCode = response.cause[index].code;
+							checkAndActiveError(errorCode);
+			            }
+			        }
+			    
+			        if($("#installmentsOption").val()=="-1"){
+			           alert("missing installments");
+			        }
+			    
+			    }else if($("#installmentsOption").val()=="-1"){
+			           alert("missing installments");
+			    }else {
+			        cardTokenId = response.id;
+
+			        var data = {
+			            "amount": parseInt($("#amount").val()),
+			            "reason": $("#reason").val(),
+			            "currency_id": currencies[$("#site").val()],
+			            "installments": parseInt($("#installmentsOption").val()),
+			            "card_token_id": cardTokenId,
+			            "payment_method_id" : pmt ,
+			            "card_issuer_id":$("#issuersOptions").val()? parseInt($("#issuersOptions").val()):null,
+			            "external_reference": "A1"
+			        };
+			        if(customer){
+			            data["customer"] = customer.id;
+			        }else{
+			            data["customer"] = {
+			                "email": $("#email").val()?$("#email").val():customers[$("#site").val()],
+			            };
+			        }
+					/*
+			         if($("#saveMyCard").is(":checked") && $("#saveMyCard").is(":visible")){
+			            if(customer){
+			                doRequest("POST","/customers/"+customer.id+"/cards",{"card":cardTokenId},function(status,response){
+			                    alert("card saved");
+			                });
+			            }else{
+			                doRequest("POST","/customers",{"email": data["customer"]["email"],"card":cardTokenId},function(status,response){
+			                    alert("card saved");
+			                });
+			            }
+			        }*/
+			        
+			        doRequest("POST","/checkout/custom/beta/create_payment",data,function(status,response){
+			                                Checkout.clearSession();
+			                                var r = "status: " + response.status + "<br>" + "payment_id: " + response.payment_id;
+			                                $("input[data-checkout]").val("");
+
+			                               if(status!=500 && status!=400 && $("#saveMyCard").is(":checked") && $("#saveMyCard").is(":visible")){
+			                                    if(customer){
+			                                        doRequest("POST","/customers/"+customer.id+"/cards",{"card":cardTokenId},function(status,response){
+			                                            if(response.cards.total>0){
+			                                                alert("card saved");
+			                                            }else{
+			                                                alert("card not save, status:"+status);
+			                                            }
+			                                        });
+			                                    }else{
+			                                        doRequest("POST","/customers",{"email": data["customer"]["email"],"card":cardTokenId},function(status,response){
+			                                             if(response.cards.total>0){
+			                                                alert("card saved");
+			                                            }else{
+			                                                alert("card not save, status:"+status);
+			                                            }
+			                                        });
+			                                    }
+			                                }
+			                                $("#result").html(r);
+			                                $("#result,#results").show();
+			                                
+			                                $("#fullForm").hide();
+			                            });
+			}
+
+			};
+
+			//Manage Errors
+			function showError(atributte) {
+				atributte.addClass("invalid");
+			}
+			function hideError(atributte) {
+				atributte.removeClass("invalid");
+			}
+
+			function checkAndActiveError(errorCode) {
+				var hasError = false;
+				if ((errorCode !== null && (errorCode === "E301" || errorCode === "205"))) {
+					showError($('label[for="ccNumber"]'));
+					hasError = true;
+				}
+				if ((errorCode !== null && (errorCode === "E302" || errorCode === "224"))) {
+					showError($('label[for="cvv"]'));
+					hasError = true;
+				}
+				if ((errorCode !== null && errorCode === "221")) {
+					showError($('label[for="cardholderName"]'));
+					hasError = true;
+				}
+				if ((errorCode !== null && (errorCode === "324" || errorCode === "214"))) {
+					showError($('label[for="docNumber"]'));
+					hasError = true;
+				}
+				if ((errorCode !== null && (errorCode === "208" || errorCode === "209" || errorCode === "325" || errorCode === "326" || errorCode == "301"))) {
+					showError($('label[for="expiration"]'));
+					hasError = true;
+				}
+				return hasError;
+			}
+
+			function doRequest(method, uri, data,callback){
+
+			    var _success = function(access_token){
+			        
+			        var url = "https://api.mercadolibre.com" + uri;
+			        url = url + ( (url.indexOf('?')== -1? "?": "&") + "access_token="+access_token);
+			        $.ajax({
+			              url: url,
+			              type: method,
+			              dataType: "json",
+			              contentType: "application/json",
+			              timeout : 10000,
+			                data: JSON.stringify(data),
+			                error : function(jqXHR, textStatus, errorThrown) { 
+			                
+			                 alert("error doRequest");
+			                 callback(jqXHR.status , {status:jqXHR.status, error: textStatus, cause:[]})
+			                },
+			                success:function(response){
+			                    callback(method=="POST"?201:200,response);
+			                }
+			        }); 
+			    }
+			    if(!accessToken){
+			        $.ajax({
+			          url: "https://api.mercadolibre.com/oauth/token",
+			          type: "POST",
+			          dataType: "json",
+			          contentType: "application/x-www-form-urlencoded",
+			          timeout : 10000,
+			          data: "grant_type=client_credentials&client_id="+ clientCredentials[$("#site").val()].client_id + "&client_secret=" + clientCredentials[$("#site").val()].client_secret,
+			            error : function(jqXHR, textStatus, errorThrown) { 
+			                alert("error access_token");
+			            },
+			            success:function(response){
+			                accessToken = response.access_token;
+			                _success(response.access_token);
+			            }
+			        }); 
+			    }else{
+			        _success(accessToken);
+			    }
+			}
+
+			function searchCustomer(email){
+			    $("#fullForm").hide();
+			    customer = null;
+			    doRequest("GET","/customers/search?email="+email,"",function(status,response){
+			        if(status==200 && response.total>0){
+			            customer = response.results[0];
+			            if(response.results[0].cards.total>0){
+			                var cardsOptions = "";
+			                $.each(response.results[0].cards.data,function(index,value){
+			                    cardsOptions +="<option value="+value.id+" first_six_digits='"+value.first_six_digits+"' class='card-field'>"+value.payment_method_id+" terminada en "+value.last_four_digits+"</option>"
+			                });
+			                cardsOptions +="<option value='-1'>Another card</option>"
+			                $("select[data-checkout='cardId']").html(cardsOptions);
+			             	$("select[data-checkout='cardId']").change();
+			            }
+			        }
+			        $("#init").hide()
+			        $("#fullForm").show();
+				});
+			};
+
+			jQuery(function($) {
+
+				$('#cardNumber').payment('formatCardNumber');
+				$('#expiration').payment('formatCardExpiry');
+				$('#securityCode').payment('formatCardCVC');
+
+
+			$("select[data-checkout='cardId']").bind("change",function(){
+			    $("#issuersField,#installments").hide();
+			    if($(this).val()!="-1"){
+			        $.each(fullData,function(index,value){
+			            $("label[for='"+value+"']").addClass("hidden");
+			        });
+			        $("#rememberCard").addClass("hidden");
+			        $("#cardId").removeClass("hidden");
+			         $("label[for='cvv']").removeClass("hidden");
+
+			        Checkout.getPaymentMethod($("select[data-checkout='cardId'] option:selected").attr("first_six_digits"),setPaymentMethodInfo);
+			    }else{
+			        
+			        $("#rememberCard").removeClass("hidden");
+			        $.each(fullData,function(index,value){
+			            $("label[for='"+value+"']").removeClass("hidden");
+			           });
+			    }
+			});
+
+			var docTypes = Checkout.getDocTypes($("#site").val().toUpperCase());
+
+			if(docTypes){
+			    var options ="<select data-checkout='docType' class='card-field'>";
+			    $.each(docTypes, function(index, value) {
+			        options += "<option value='"+ value.id +"' class='card-field'>"+ value.name + "</option>";
+			    });
+			    options+="</select>";
+			    $("#docType").html($("#docType").html()+options);
+
+			    $("#docType").removeClass("hidden");
+			}
+
+			var subDocTypes = Checkout.getSubDocTypes($("#site").val().toUpperCase());
+
+			if(subDocTypes){
+			    var options ="<select data-checkout='subDocType' class='card-field'>";
+
+			    $.each(subDocTypes[docTypes[0].id], function(index, value) {
+			        options += "<option value='"+ value +"' class='card-field'>"+ value+ "</option>";
+			    });
+			    options+="</select>";
+			    $("#subDocType").html($("#subDocType").html()+options);
+
+			    $("#subDocType").removeClass("hidden");
+
+			    $("select[data-checkout='docType']").bind("change",function(){
+			        options ="";
+			        $.each(subDocTypes[$(this).val()], function(index, value) {
+			                options += "<option value='"+ value +"'>"+ value+ "</option>";
+			            });
+			        $("select[data-checkout='subDocType']").html(options);
+			    });
+			}
+
+			$("label[class=card-label]").bind("change", function(){
+				hideError($(this));
+			});
+
+			$("#back").bind("click",function(){
+				$("#result").html("");
+				$("#results,#fullForm").hide();
+				$("#init").show();
+			   
+			});
+			$("#login").bind("click",function(){
+			    $("#result").html("").addClass("hidden");
+			    if($("#email").val()==""){
+			    	showError($('label[for="email"]'));
+			    	showError($('label[for="amount"]'));
+			    	showError($('label[for="reason"]'));
+			    }else{
+			        $("#email").removeClass("required");
+			        searchCustomer($("#email").val());
+			    }
+			})
+
+			$("#changeSite").bind("click",function(e){
+			    Checkout.setPublishableKey(setPublishableKey[$("#site").val()]);
+			    Checkout.clearSession();
+			    $("input[data-checkout='cardNumber']").change();
+
+			});
+
+			$('#doPayment').bind("click", function(e) {
+			    var $form = $('#card-form');
+
+			    if($("#installments").val()=="-1"){
+			            alert("missing installments");
+			            return false;
+			    }
+			    var expires = document.getElementById('expiration').value.trim().replace(" ","");
+				var expiresSplit = expires.split('/');
+				var expirationYear = expiresSplit[1];
+				var expirationMont = expiresSplit[0];
+
+				$form.append($('<input type="hidden" data-checkout="cardExpirationMonth"/>').val(expirationMont));
+				$form.append($('<input type="hidden" data-checkout="cardExpirationYear"/>').val(expirationYear));
+
+
+			    Checkout.createToken($form, mpResponseHandler);
+
+			    return false;
+			});
+
+
+			$("input[data-checkout='cardNumber']").bind("keyup",function(){
+			      var bin = $(this).val().replace(/ /g, '').replace(/-/g, '').replace(/\./g, '');
+			      if (bin.length == 6){
+			        Checkout.getPaymentMethod(bin,setPaymentMethodInfo);
+			      }
+			});
+
+			$("input[data-checkout='cardNumber']").bind("change",function(){
+			      var bin = $(this).val().replace(/ /g, '').replace(/-/g, '').replace(/\./g, '');
+			      if (bin.length >= 6){
+			        Checkout.getPaymentMethod(bin,setPaymentMethodInfo,"visa");
+			      }
+			});
+
+			//Sets the data for the choosen payment method
+			function setPaymentMethodInfo(status, result){
+			  $.each(result, function(p, r){
+			      
+			          Checkout.getInstallments(r.id ,parseFloat($("#amount").val()), setInstallmentInfo);
+			         // Checkout.showIssuers(r.id,showIssuers);
+			          pmt = r.id;
+			          Checkout.getCustomizedCardIssuers(r.id,showCustomizedCardIssuers);
+			          return;
+			  
+			  });
+			};
+
+			
+
+			//It places the available installment plans in the 'installmentsOption' div
+			function setInstallmentInfo(status, installments){
+			    var html_options = "<option value='-1'>choose a installment...</option>";
+			    for(i=0; installments && i<installments.length; i++){
+			        html_options += "<option value='"+installments[i].installments+"'>"+installments[i].installments +" installment of "+installments[i].share_amount+" ("+installments[i].total_amount+")</option>";
+			    };
+			    $("#installments").show();
+			    $("#installmentsOption").html(html_options);
+			};
+
+		/*	function showIssuers(status, issuers){
+			  var i,options="<select data-checkout='cardIssuerId'><option value='-1'>Elige...</option>";
+			  for(i=0; issuers && i<issuers.length;i++){
+			    if(issuers[i].name!="default"){
+			            options+="<option value='"+issuers[i].id+"'>"+issuers[i].name +" </option>";
+			    }else{
+			        options+="<option value='"+issuers[i].id+"'> Cualquier otro banco </option>";
+			    }
+			  }
+			  options+="</select>";
+			  if(issuers.length>0){
+			     $("#issuersField").show();
+			    $("#issuersOptions").html(options);
+			  }else{
+			    $("#issuersOptions").html("");
+			    $("#issuersField").hide();
+			  }
+			};
+*/
+			function showCustomizedCardIssuers(status, issuers){
+			    var i,options="<option value='-1'>choose a bank...</option>";
+			    var installmentPromotionsMsg = "¡Hasta xx cuotas sin interés!";
+			    if(status!=200){
+			        $("#issuersOptions").html("");
+			        $("#issuersField").hide();
+			        return
+			    }
+			    var banksListOpt = {} , optionsBank, defaultIssuer;
+			    $.each(issuers, function(index, value) {
+
+			        if(value.name!='default'){
+			            optionsBank = "<option value='"+ value.id +"'>"+ value.name + "</option>";
+			            i = value.promotions.max_installments ? value.promotions.max_installments  : 0;
+			            banksListOpt[i] = banksListOpt[i] ? banksListOpt[i] : "";
+			            banksListOpt[i] += optionsBank;
+			        }else{
+			            defaultIssuer = value;
+			        } 
+			        
+			    });
+			            
+			        
+			    banksListOpt[0] = banksListOpt[0] ? banksListOpt[0] : "";
+			    banksListOpt[0] += "<option value='"+ defaultIssuer.id +"' default='"+ defaultIssuer.id +"'>Cualquier otro banco</option>";
+			    
+			    var keys = Object.keys(banksListOpt).sort(function(a,b){return b-a;});
+			    for (i=0; i < keys.length; i++)
+			    {
+			       if(Object.keys(issuers).length == 1)
+			            options += banksListOpt[keys[i]];
+			        else if (keys[i] == 0){
+			            if(keys.length>1){
+			                options += "<optgroup name='othBank' label='Otro banco'>"+banksListOpt[keys[i]]+"</optgroup>";
+			            }else{
+			                options += banksListOpt[keys[i]];
+			            }
+			        }else{
+			            options += "<optgroup label='"+ installmentPromotionsMsg.replace("xx", keys[i]).replace("!","").replace("¡","") +"'>"+banksListOpt[keys[i]]+"</optgroup>" ;
+			        }
+			    }
+			  
+			   
+
+			    if(issuers.length>1){
+			        $("#issuersField").show();
+			        $("#issuersOptions").html(options);
+			    }else{
+			        $("#issuersOptions").html("");
+			        $("#issuersField").hide();
+			    }
+			};
+
+			$("#issuersOptions").change(function(){
+			    var bin;
+			    if($("input[data-checkout='cardNumber']").is(":visible")){
+			        bin = $("input[data-checkout='cardNumber']").val().replace(/ /g, '').replace(/-/g, '').replace(/\./g, '').slice(0,6);
+			    }else if($("select[data-checkout='cardId']").is(":visible")){
+			        bin = $("select[data-checkout='cardId'] option:selected").attr("first_six_digits");
+			    }
+
+			    Checkout.getInstallmentsByIssuerId(bin,this.value,parseFloat($("#amount").val()),setInstallmentInfo);
+			});
+
+			$("input[data-checkout='cardNumber']").change();
+
+			});
+
+
+			</script>
+	</body>
+</html>
