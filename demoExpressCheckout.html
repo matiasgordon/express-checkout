@@ -232,7 +232,7 @@
 			                                if(status==201){
 			                                	r+= "payment_id: " + response.payment_id;
 			                                }else{
-			                                	r+=  response;
+			                                	r+=  JSON.stringify(response);
 			                                }
 			                                $("input[data-checkout]").val("");
 
