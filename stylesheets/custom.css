@@ -1876,7 +1876,8 @@ input::-ms-clear {
     content: "\0020";
     display: block;
     height: 0;
-    overflow: hidden; }
+  /*  overflow: hidden; */
+  }
   .clearfix:after, .checkbox-label:after, .grid:after,
   .grid .row:after, #container:after {
     clear: both; }
@@ -2025,7 +2026,8 @@ button.paypal {
     content: "\0020";
     display: block;
     height: 0;
-    overflow: hidden; }
+  /*  overflow: hidden; */
+  }
   .clearfix:after, .checkbox-label:after, .grid:after,
   .grid .row:after, #container:after {
     clear: both; }
