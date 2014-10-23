@@ -137,7 +137,7 @@
 
 			//resize modal
 			if (self !== top && typeof window.parent.postMessage !== 'undefined') {
-				window.parent.postMessage('{"action":"resize","data":{"width":"450","height":"500"}}', "*");
+				window.parent.postMessage('{"action":"resize","data":{"width":"450","height":"750"}}', "*");
 			}
 			
 
@@ -224,7 +224,13 @@
 			        
 			        doRequest("POST","/checkout/custom/beta/create_payment",data,function(status,response){
 			                                Checkout.clearSession();
-			                                var r = "status: " + response.status + "<br>" + "payment_id: " + response.payment_id;
+			                                var r = "status: " + response.status "<br>";
+
+			                                if(response.status==201){
+			                                	r+= "payment_id: " + response.payment_id;
+			                                }else{
+			                                	r+=  response;
+			                                }
 			                                $("input[data-checkout]").val("");
 
 			                               if(status!=500 && status!=400 && $("#saveMyCard").is(":checked") && $("#saveMyCard").is(":visible")){
