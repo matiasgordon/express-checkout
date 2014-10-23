@@ -247,6 +247,9 @@
 			                                        });
 			                                    }else{
 			                                        doRequest("POST","/customers",{"email": data["customer"]["email"],"card":cardTokenId},function(status,response){
+			                                        	if(status!=201){
+			                                        		alert("card not save, status:"+status);
+			                                        	}
 			                                             if(response.cards.total>0){
 			                                                alert("card saved");
 			                                            }else{
