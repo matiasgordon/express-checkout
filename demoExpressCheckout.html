@@ -137,7 +137,7 @@
 
 			//resize modal
 			if (self !== top && typeof window.parent.postMessage !== 'undefined') {
-				window.parent.postMessage('{"action":"resize","data":{"width":"450","height":"500"}}', "*");
+				window.parent.postMessage('{"action":"resize","data":{"width":"450","height":"600"}}', "*");
 			}
 			
 
@@ -511,6 +511,10 @@
 			    };
 			    $("#installments").show();
 			    $("#installmentsOption").html(html_options);
+
+			    if (self !== top && typeof window.parent.postMessage !== 'undefined') {
+					window.parent.postMessage('{"action":"resize","data":{"width":"450","height":"750"}}', "*");
+				}
 			};
 
 		/*	function showIssuers(status, issuers){
