@@ -224,7 +224,7 @@
 			        
 			        doRequest("POST","/checkout/custom/beta/create_payment",data,function(status,response){
 			                                Checkout.clearSession();
-			                                var r = "status: " + response.status "<br>";
+			                                var r = "status: " + response.status + "<br>";
 
 			                                if(response.status==201){
 			                                	r+= "payment_id: " + response.payment_id;
