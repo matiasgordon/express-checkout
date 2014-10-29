@@ -535,25 +535,6 @@
 			    resizeModal("450","750");
 			};
 
-		/*	function showIssuers(status, issuers){
-			  var i,options="<select data-checkout='cardIssuerId'><option value='-1'>Elige...</option>";
-			  for(i=0; issuers && i<issuers.length;i++){
-			    if(issuers[i].name!="default"){
-			            options+="<option value='"+issuers[i].id+"'>"+issuers[i].name +" </option>";
-			    }else{
-			        options+="<option value='"+issuers[i].id+"'> Cualquier otro banco </option>";
-			    }
-			  }
-			  options+="</select>";
-			  if(issuers.length>0){
-			     $("#issuersField").show();
-			    $("#issuersOptions").html(options);
-			  }else{
-			    $("#issuersOptions").html("");
-			    $("#issuersField").hide();
-			  }
-			};
-*/
 			function showCustomizedCardIssuers(status, issuers){
 			    var i,options="<option value='-1'>choose a bank...</option>";
 			    var installmentPromotionsMsg = "¡Hasta xx cuotas sin interés!";
