@@ -511,12 +511,9 @@
 			//Sets the data for the choosen payment method
 			function setPaymentMethodInfo(status, result){
 			  $.each(result, function(p, r){
-			      
-			          Checkout.getInstallments(r.id ,parseFloat($("#amount").val()), setInstallmentInfo);
-			         // Checkout.showIssuers(r.id,showIssuers);
-			          pmt = r.id;
-			          Checkout.getCustomizedCardIssuers(r.id,showCustomizedCardIssuers);
-			          return;
+			      	 pmt = r.id;
+			         Checkout.getInstallments(r.id ,parseFloat($("#amount").val()), setInstallmentInfo);
+			        return;
 			  
 			  });
 			};
@@ -531,6 +528,10 @@
 			    };
 			    $("#installments").show();
 			    $("#installmentsOption").html(html_options);
+			   
+			    if(pmt){
+			    	Checkout.getCustomizedCardIssuers(pmt,showCustomizedCardIssuers);
+			    }
 
 			    resizeModal("450","750");
 			};
