@@ -358,7 +358,8 @@
 			            if(response.results[0].cards.total>0){
 			                var cardsOptions = "";
 			                $.each(response.results[0].cards.data,function(index,value){
-			                    cardsOptions +="<option value="+value.id+" first_six_digits='"+value.first_six_digits+"' class='card-field'>"+value.payment_method_id+" terminada en "+value.last_four_digits+"</option>"
+			                	var pmtName = value.payment_method.name != null ? value.payment_method.name : value.payment_method.id
+			                    cardsOptions +="<option value="+value.id+" first_six_digits='"+value.first_six_digits+"' class='card-field'>"+pmtName+" terminada en "+value.last_four_digits+"</option>"
 			                });
 			                cardsOptions +="<option value='-1'>Another card</option>"
 			                $("select[data-checkout='cardId']").html(cardsOptions);
