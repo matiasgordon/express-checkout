@@ -359,7 +359,7 @@
 			                var cardsOptions = "";
 			                $.each(response.results[0].cards.data,function(index,value){
 			                	var pmtName = value.payment_method.name != null ? value.payment_method.name : value.payment_method.id
-								cardsOptions +="<option value="+value.id+" first_six_digits='"+value.first_six_digits+"' class='card-field'>"+pmtName+" terminada en "+value.last_four_digits+"</option>";
+								cardsOptions +="<option value="+value.id+" issuer_id="+value.issuer.id+" first_six_digits='"+value.first_six_digits+"' class='card-field'>"+pmtName+" terminada en "+value.last_four_digits+"</option>";
 			                    //cardsOptions +="<option value="+value.id+" first_six_digits='"+value.first_six_digits+"' issuer_id='"+value.issuer.id+"' class='card-field'>"+pmtName+" terminada en "+value.last_four_digits+"</option>"
 			                });
 			                cardsOptions +="<option value='-1'>Another card</option>"
