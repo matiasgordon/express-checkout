@@ -611,7 +611,7 @@
 			    var bin;
 			    if($("input[data-checkout='cardNumber']").is(":visible")){
 			        bin = $("input[data-checkout='cardNumber']").val().replace(/ /g, '').replace(/-/g, '').replace(/\./g, '').slice(0,6);
-			    }else if($("select[data-checkout='cardId']").is(":visible")){
+			    }else {
 			        bin = $("select[data-checkout='cardId'] option:selected").attr("first_six_digits");
 			    }
 
