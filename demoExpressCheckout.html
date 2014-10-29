@@ -510,8 +510,12 @@
 			function setPaymentMethodInfo(status, result){
 			  $.each(result, function(p, r){
 			      	 pmt = r.id;
-			      	 
-			         Checkout.getInstallments(r.id ,parseFloat($("#amount").val()), setInstallmentInfo);
+
+			         Checkout.getInstallments(r.id ,parseFloat($("#amount").val()), function(status, installments){
+ 							setInstallmentInfo(status, installments);
+					    	Checkout.getCustomizedCardIssuers(pmt,showCustomizedCardIssuers);
+			         });
+
 			        return;
 			  
 			  });
@@ -528,10 +532,6 @@
 			    $("#installments").show();
 			    $("#installmentsOption").html(html_options);
 			   
-			    if(pmt){
-			    	Checkout.getCustomizedCardIssuers(pmt,showCustomizedCardIssuers);
-			    }
-
 			    resizeModal("450","750");
 			};
 
