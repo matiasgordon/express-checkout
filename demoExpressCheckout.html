@@ -395,8 +395,6 @@
 
 			        Checkout.getPaymentMethod($("select[data-checkout='cardId'] option:selected").attr("first_six_digits"),setPaymentMethodInfo);
 			        
-			    	$("#issuersOptions").val($("select[data-checkout='cardId'] option:selected").attr("issuer_id")).change();
-
 			        resizeModal("450","400");
 			    }else{
 			         
