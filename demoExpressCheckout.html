@@ -362,9 +362,9 @@
 								cardsOptions +="<option value="+value.id+" issuer_id="+value.issuer.id+" first_six_digits='"+value.first_six_digits+"' class='card-field'>"+pmtName+" terminada en "+value.last_four_digits+"</option>";
 			                  
 			                });
-			                cardsOptions +="<option value='-1'>Another card</option>"
-			                $("select[data-checkout='cardId']").html(cardsOptions);
-			             	$("select[data-checkout='cardId']").change();
+			                cardsOptions +="<option value='-1'>Another card</option>";
+			                $("select[data-checkout='cardId']").html(cardsOptions).change();
+			             	
 			             	resizeModal("450","400");
 			            }
 			        }else{
@@ -510,6 +510,7 @@
 			function setPaymentMethodInfo(status, result){
 			  $.each(result, function(p, r){
 			      	 pmt = r.id;
+
 			         Checkout.getInstallments(r.id ,parseFloat($("#amount").val()), setInstallmentInfo);
 			        return;
 			  
