@@ -287,10 +287,11 @@
 			    $("#fullForm").hide();
 			    
 			    var _mpCustomer = function(status,response){
-			    	customer = response.customer;
-			        if(status==200 && response.customer && response.customer.id){
-			           if(response.customer.cards.total>0){
-			                showCards(response.customer.cards.data);
+			    	
+			        if(status==200 && response.id){
+			           customer = response;
+			           if(response.cards.total>0){
+			                showCards(response.cards.data);
 			           }
 			        }else{
 			        	 resizeModal("450","750");
