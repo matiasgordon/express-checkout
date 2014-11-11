@@ -290,8 +290,8 @@
 			    	
 			        if(status==200 && response.id){
 			           customer = response;
-			           if(response.cards.total>0){
-			                showCards(response.cards.data);
+			           if(response.cards.length>0){
+			                showCards(response.cards);
 			           }
 			        }else{
 			        	 resizeModal("450","750");
