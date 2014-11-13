@@ -21,11 +21,16 @@
       </ul>
       test_user_96675501@testuser.com
     </div>
-    <a href="http://angelesdtl.github.io/express-checkout/demoExpressCheckout.html" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Start</a>
+    <!--a href="http://angelesdtl.github.io/express-checkout/demoExpressCheckout.html" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Start</a-->
+    
+    <a href="https://www.mercadopago.com/checkout/examples/frontend/init" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Start</a>
+    
+    
     <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
     
     <script>
-      $MPC.conf.messageOrigin = "angelesdtl";
+      //$MPC.conf.messageOrigin = "angelesdtl";
+      $MPC.conf.messageOrigin = ".*";
       $MPC.conf.resizeDuration = 100;
       function execute_my_onreturn(json) {
      /*   alert("this is your access token " + json.card_token_id + " now you can Pay with MP");
