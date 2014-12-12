@@ -4,9 +4,56 @@
   </head>
   <body>
    
-    <div>
-      <h3>Tarjetas mockeadas MLA</h3>
-      <ul>
+
+    <fieldset>
+      <legend>Checkout Custom: Escenarios en orden de complejidad</legend>
+    <ul style="list-style:none">
+    <li>
+      <label>Carga de TC (front) + Pago (back)</label>
+      <a href="https://www.mercadopago.com/checkout/examples/model1/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-1</a>
+    </li>
+    <li>
+       <label>Agregado de Customers (Paso 1 + guardar customer)</label>
+        <a href="https://www.mercadopago.com/checkout/examples/model2/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-2</a>
+    </li>
+    <li>
+       <label>Listar las tarjetas guardadas + Pago</label>
+      <a href="https://www.mercadopago.com/checkout/examples/model3/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-3</a>
+    </li>
+    <li>
+        <label>Manejo de Issuers. simil model-2</label>
+    <a href="https://www.mercadopago.com/checkout/examples/model4/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-4</a>
+    </li>
+    
+    <li>
+        <label>Manejo de Installments + promos (TODO)</label>
+    <!--a href="https://www.mercadopago.com/checkout/examples/model5/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-5</a-->
+    </li>
+    <li>
+        <label>Ejemplo completo (TODO)</label>
+    <!--a href="https://www.mercadopago.com/checkout/examples/model6/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-6</a-->
+    </li>
+    <li>
+        <label>Servicio para página de Congrats (TODO)</label>
+    <!--a href="https://www.mercadopago.com/checkout/examples/model7/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-7</a-->
+    </li>
+    <li>
+        <label>Descuentos (TODO)</label>
+    <!--a href="https://www.mercadopago.com/checkout/examples/model8/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-8</a-->
+    </li>
+    
+
+    <li>
+        <label>Pagos preautorizados (TODO)</label>
+    <!--a href="https://www.mercadopago.com/checkout/examples/model9/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-9</a-->
+    </li>
+  </ul>
+    
+</fieldset>
+
+<fieldset>
+  <legend>Tarjetas mockeadas MLA</legend>
+    <ul>
         <li>"visa":"4170068810108020"</li>
         
         <li>"amex": "371180303257522"</li>
@@ -19,28 +66,10 @@
         
         <li>"cencosud": "6034937272862830"</li>
       </ul>
-      test_user_96675501@testuser.com
-    </div>
-    <!--a href="http://angelesdtl.github.io/express-checkout/demoExpressCheckout.html" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Start</a-->
-    
-    <div>
-      <label>Integracion simple, sin customers. Formulario completo</label>
-      <a href="https://www.mercadopago.com/checkout/examples/step1/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- step1</a>
-    </div>
-    <div>
-       <label>Carga de formulario. Registracion de customer</label>
-        <a href="https://www.mercadopago.com/checkout/examples/step2/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- step2</a>
-    </div>
-    <div>
-       <label>Solo Express checkout, login + cards</label>
-      <a href="https://www.mercadopago.com/checkout/examples/step3/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- step3</a>
-    </div>
-    <div>
-        <label>Integracion completa, login + cards + formulario</label>
-    <a href="https://www.mercadopago.com/checkout/examples/step4/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- step4</a>
-    </div>
-    
-    
+    Customer con tarjetas guardadas: <strong>test_user_96675501@testuser.com</strong>
+
+</fieldset>
+
     <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
     
     <script>
