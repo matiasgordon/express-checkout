@@ -1,87 +1,140 @@
 <html>
   <head>
     <meta name="layout" content="default"/>
+    <style type="text/css">
+    
+      .ch-box {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px auto;
+      }
+    
+
+</style>
   </head>
   <body>
    
-
-
    <!--fieldset>
       <legend>Desarrollo</legend>
-    <ul style="list-style:none">
-    <li>
-      <label>Carga de TC (front) + Pago (back)</label>
-      <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model1/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-1</a>
-    </li>
-    <li>
-       <label>Agregado de Customers (Paso 1 + guardar customer)</label>
-        <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model2/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-2</a>
-    </li>
-    <li>
-       <label>Listar las tarjetas guardadas + Pago</label>
-      <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model3/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-3</a>
-    </li>
-    <li>
-        <label>Manejo de Issuers. simil model-2</label>
-    <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model4/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-4</a>
-    </li>
     
-    <li>
-        <label>Manejo de Installments + promos</label>
-    <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model5/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-5</a>
-    </li>
-    <li>
-      <label>Descuentos (payer logueado)</label>
-      <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model6/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-6</a>
-    </li>
+      <div class="ch-box ">
+        <label> Pagar en una cuota (step 1)</label>
+        <section>
+          <a href="https://localhost:8443/checkout/examples/step1/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+          <a href="https://localhost:8443/checkout/examples/step1/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+          <a href="https://localhost:8443/checkout/examples/step1/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+          <a href="https://localhost:8443/checkout/examples/step1/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+          <a href="https://localhost:8443/checkout/examples/step1/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+        </section>
+      </div>
+      <div class="ch-box ">
+        <label>Pagar con una tarjeta guardada en una cuota (step 2)</label>
+        <section>
+        <a href="https://localhost:8443/checkout/examples/step2/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+        <a href="https://localhost:8443/checkout/examples/step2/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+        <a href="https://localhost:8443/checkout/examples/step2/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+        <a href="https://localhost:8443/checkout/examples/step2/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+        <a href="https://localhost:8443/checkout/examples/step2/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+        </section>
+      </div>
+
+      <div class="ch-box ">
+        <label>Pagar con una tarjeta guardada en cuotas (step 3)</label>
+        <section>
+        <a href="https://localhost:8443/checkout/examples/step3/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+        <a href="https://localhost:8443/checkout/examples/step3/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+        <a href="https://localhost:8443/checkout/examples/step3/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+        <a href="https://localhost:8443/checkout/examples/step3/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+        <a href="https://localhost:8443/checkout/examples/step3/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+        </section>
+      </div>
+      
+      <div class="ch-box ">
+          <label>Pagar con medios off (step 4)</label>
+          <section>
+          <a href="https://localhost:8443/checkout/examples/step4/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+          <a href="https://localhost:8443/checkout/examples/step4/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+          <a href="https://localhost:8443/checkout/examples/step4/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+          <a href="https://localhost:8443/checkout/examples/step4/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+          <a href="https://localhost:8443/checkout/examples/step4/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+          </section>
+      </div>
+      
+      <div class="ch-box ">
+          <label>Mostar descuentos (step 5)</label>
+          <section>
+          <a href="https://localhost:8443/checkout/examples/step5/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+          <a href="https://localhost:8443/checkout/examples/step5/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+          <a href="https://localhost:8443/checkout/examples/step5/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+          <a href="https://localhost:8443/checkout/examples/step5/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+          <a href="https://localhost:8443/checkout/examples/step5/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+          </section>
+      </div>
     
-    <li>
-    <label>Ejemplo completo (manejo de cards y carga de TC en un mismo form) - formateo de datos (JQuery)</label>
-    <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model7/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-7</a>
-    </li>
+  </fieldset-->
 
-    <li>
-        <label>Todos los medios de pago + pantallas de resultado</label>
-    <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model8/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-8</a>
-    </li>
+  <fieldset>
+      <legend>Checkout custom</legend>
+      
+      <div class="ch-box">
+        <label> Pagar en una cuota (step 1)</label>
+        <section>
+        <a href="https://www.mercadopago.com/checkout/examples/step1/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step1/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step1/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step1/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step1/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+      </section>
+       </div>
+      
+        <div class="ch-box">
+        <label>Pagar con una tarjeta guardada en una cuota (step 2)</label>
+        <section>
+        <a href="https://www.mercadopago.com/checkout/examples/step2/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step2/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step2/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step2/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step2/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+      </section>
+      </div>
+      
+      <div class="ch-box ">
+        <label>Pagar con una tarjeta guardada en cuotas (step 3)</label>
+        <section>
+        <a href="https://www.mercadopago.com/checkout/examples/step3/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step3/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step3/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step3/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+        <a href="https://www.mercadopago.com/checkout/examples/step3/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+      </section>
+       </div>
+      
+      <div class="ch-box ">
+          <label>Pagar con medios off (step 4)</label>
+          <section>
+          <a href="https://www.mercadopago.com/checkout/examples/step4/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+          <a href="https://www.mercadopago.com/checkout/examples/step4/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+          <a href="https://www.mercadopago.com/checkout/examples/step4/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+          <a href="https://www.mercadopago.com/checkout/examples/step4/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+          <a href="https://www.mercadopago.com/checkout/examples/step4/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+        </section>
+       </div>
+      
+      <div class="ch-box ">
+          <label>Mostar descuentos (step 5)</label>
+          <section>
+          <a href="https://www.mercadopago.com/checkout/examples/step5/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLA</a>
+          <a href="https://www.mercadopago.com/checkout/examples/step5/index?site_id=mlb" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLB</a>
+          <a href="https://www.mercadopago.com/checkout/examples/step5/index?site_id=mlm" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLM</a>
+          <a href="https://www.mercadopago.com/checkout/examples/step5/index?site_id=mlv" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MLV</a>
+          <a href="https://www.mercadopago.com/checkout/examples/step5/index?site_id=mco" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay-MCO</a>
+        </section>
+       </div>
+     
+  </fieldset>
 
 
-<fieldset>
-      <legend>Sites con particularidades</legend>
-      <p>En MLM es necesario el medio de pago para determinar la tarjeta y <strong>no</strong> es necesario el docType para pagar</p>
-      <p>En MLV ademas del docType es necesario el subDocType para el proceso de pagos</p>
-    <li>
-
-        <label>Mexico: creacion de customers y cards, installments = 1</label>
-        
-    <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model9/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-9</a>
-    </li>
-
-    <li>
-        <label>Mexico: manejo de issuers e installments</label>
-    <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model10/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-10</a>
-    </li>
-
-    <li>
-        <label>Venezuela: subTypes</label>
-    <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model11/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-11</a>
-    </li>
-
-</fieldset>
-
-
-  
-
-    <li>
-        <label>Pagos preautorizados (TODO)</label>
-    <!- -a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model12/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-12</a- ->
-    </li>
-  </ul>
-    
-</fieldset -->
-
-
-    <fieldset>
+  <!--fieldset>
       <legend>Checkout Custom: Escenarios en orden de complejidad</legend>
     <ul style="list-style:none">
     <li>
@@ -103,7 +156,7 @@
     
     <li>
         <label>Manejo de Installments + promos</label>
-    <a href="http://checkout-lite.mercadopadesa.com:8080/checkout/examples/model5/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-5</a>
+    <a href="https://localhost:8443/checkout/examples/model5/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-5</a>
     </li>
 
     <li>
@@ -120,40 +173,9 @@
         <label>Todos los medios de pago + pantallas de resultado</label>
     <a href="https://www.mercadopago.com/checkout/examples/model8/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-8</a>
     </li>
-
-
-
-
-<fieldset>
-      <legend>Sites con particularidades</legend>
-      <p>En MLM es necesario el medio de pago para determinar la tarjeta y <strong>no</strong> es necesario el docType para pagar</p>
-      <p>En MLV ademas del docType es necesario el subDocType para el proceso de pagos</p>
-    <li>
-
-        <label>Mexico: creacion de customers y cards, installments = 1</label>
-
-    <a href="https://www.mercadopago.com/checkout/examples/model9/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-9</a>
-    </li>
-
-    <li>
-        <label>Mexico: manejo de issuers e installments</label>
-    <a href="https://www.mercadopago.com/checkout/examples/model10/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-10</a>
-    </li>
-
-    <li>
-        <label>Venezuela: subTypes</label>
-    <a href="https://www.mercadopago.com/checkout/examples/model11/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-11</a>
-    </li>
-
-</fieldset>
-
-    <li>
-        <label>Pagos preautorizados (TODO)</label>
-    <!--a href="https://www.mercadopago.com/checkout/examples/model12/index" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pay- model-12</a-->
-    </li>
   </ul>
     
-</fieldset>
+</fieldset-->
 
 <fieldset>
   <legend>Tarjetas mockeadas MLA</legend>
